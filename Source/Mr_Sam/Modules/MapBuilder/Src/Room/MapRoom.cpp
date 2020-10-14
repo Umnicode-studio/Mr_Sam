@@ -16,6 +16,31 @@ bool UMapRoom::IsHaveFlag(const ERoomFlags Flag) const
 }
 
 // ---
+UMapRoom* UMapRoom::MAKE(UObject* WorldContextObject, const int RoomWidth,
+                         const FIntPoint RoomStart, const FIntPoint RoomFinish,
+                         const int RoomGlobalPosition, const FRoomCoordinates RoomCoordinates)
+{
+    if (IsValid(WorldContextObject))
+    {
+        UMapRoom *Room = NewObject<UMapRoom>(WorldContextObject);
+        if (IsValid(Room))
+        {
+            Room->Width = RoomWidth;
+            
+            Room->Start = RoomStart;
+            Room->Finish = RoomFinish;
+
+            Room->GlobalPosition = RoomGlobalPosition;
+            Room->Coordinates = RoomCoordinates;
+
+            return Room;
+        }
+    }
+    return nullptr;
+}
+
+
+// ---
 void UMapRoom::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
     Super::PostEditChangeProperty(PropertyChangedEvent);

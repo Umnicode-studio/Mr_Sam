@@ -43678,6 +43678,7 @@
       <e p="Mr_Sam.sln.DotSettings.user" t="Include" />
       <e p="Mr_Sam.uproject" t="Include" />
       <e p="packages" t="ExcludeRecursive" />
+      <e p="README" t="Include" />
       <e p="Source" t="Include">
         <e p="Mr_Sam" t="Include">
           <e p="Framework" t="Include">
@@ -43694,8 +43695,6 @@
               <e p="GameCharacter.h" t="Include" />
               <e p="Registry.cpp" t="Include" />
               <e p="registry.h" t="Include" />
-              <e p="StaticActor.cpp" t="Include" />
-              <e p="StaticActor.h" t="Include" />
             </e>
             <e p="LevelTransit" t="Include">
               <e p="LevelTransit.cpp" t="Include" />
@@ -43741,6 +43740,8 @@
                 <e p="Item" t="Include">
                   <e p="MapItem.cpp" t="Include" />
                   <e p="MapItem.h" t="Include" />
+                  <e p="MapItemOutput.cpp" t="Include" />
+                  <e p="MapItemOutput.h" t="Include" />
                   <e p="MapItemOutputArray.cpp" t="Include" />
                   <e p="MapItemOutputArray.h" t="Include" />
                 </e>
@@ -43766,7 +43767,12 @@
                   <e p="Constants.h" t="Include" />
                   <e p="MapKeyFunc.h" t="Include" />
                   <e p="MapObject.h" t="Include" />
-                  <e p="Sides.h" t="Include" />
+                  <e p="Structures" t="Include">
+                    <e p="GeneratorData.h" t="Include" />
+                    <e p="Sides.h" t="Include" />
+                  </e>
+                  <e p="UtilsFunctions.cpp" t="Include" />
+                  <e p="UtilsFunctions.h" t="Include" />
                 </e>
               </e>
             </e>

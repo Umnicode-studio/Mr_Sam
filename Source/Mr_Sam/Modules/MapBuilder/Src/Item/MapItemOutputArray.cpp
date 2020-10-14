@@ -79,9 +79,9 @@ bool UMapItemOutputArray::RemoveItem(FIntPoint Position, UMapLayer* Layer)
 // ---
 bool UMapItemOutputArray::Empty() const
 {
-    return this->GetSize() == 0;
+    return this->Num() == 0;
 }
-int UMapItemOutputArray::GetSize() const
+int UMapItemOutputArray::Num() const
 {
     return this->Content.Num();
 }
@@ -89,7 +89,7 @@ int UMapItemOutputArray::GetSize() const
 // ---
 UMapItemOutput *UMapItemOutputArray::GetItemByIndex(int Index)
 {
-    if (Index > -1 && Index < this->GetSize()){
+    if (Index > -1 && Index < this->Num()){
         return this->Content[Index];
     }
 

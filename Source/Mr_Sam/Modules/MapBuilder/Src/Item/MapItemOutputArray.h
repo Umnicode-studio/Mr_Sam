@@ -6,7 +6,7 @@
 
 #include "CoreMinimal.h"
 
-#include "MapItem.h"
+#include "MapItemOutput.h"
 #include "../Utils/MapKeyFunc.h"
 
 #include "MapItemOutputArray.generated.h"
@@ -16,7 +16,7 @@ class MR_SAM_API UMapItemOutputArray : public UMapObject {
     GENERATED_BODY()
     
     TMultiMap <FIntPoint *, int, FDefaultSetAllocator,
-                               TMultiMapKeyFuncIntPointP<int>> PositionRefsBook;
+                               TMultiMapKeyFuncIntPointPtr<int>> PositionRefsBook;
 
     void LinkItem(UMapItemOutput *Item);
     bool FixBrokenLinks(bool Remove = false); // Work around that can help update pointers in
@@ -48,7 +48,7 @@ public:
 
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")
-    int GetSize() const;
+    int Num() const;
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")
     bool Empty() const;

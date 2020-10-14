@@ -7,7 +7,7 @@
 #include "CoreMinimal.h"
 
 #include "../Utils/MapObject.h"
-#include "../Utils/Sides.h"
+#include "../Utils/Structures/Sides.h"
 
 #include "MapRoom.generated.h"
 
@@ -42,6 +42,34 @@ enum ERoomFlags{
     R_Mainpath      UMETA(DisplayName="Mainpath")
 };
 
+USTRUCT(BlueprintType)
+struct FRoomCoordinates
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
+    int PositionOnFloor = 0;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
+    int Floor = 0;
+    
+    FRoomCoordinates()
+    {
+       
+    }
+
+    FRoomCoordinates(const int PositionOnFloor, const int Floor)
+    {
+        this->PositionOnFloor = PositionOnFloor;
+        this->Floor = Floor;
+    }
+    
+    bool operator== (const FRoomCoordinates &Right) const
+    {
+        return this->PositionOnFloor == Right.PositionOnFloor && this->Floor == Right.Floor;
+    }
+};
+
 UCLASS(Blueprintable)
 class MR_SAM_API UMapRoom : public UMapObject {
     GENERATED_BODY()
@@ -58,12 +86,12 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Bounds")
     FIntPoint Finish;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    FIntPoint Coordinates; // x - position on the floor; y - floor
-
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     int GlobalPosition = 0;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
+    FRoomCoordinates Coordinates;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     TArray<FRoomPass> Passes;
@@ -78,9 +106,11 @@ public:
     bool IsHaveFlag(const ERoomFlags Flag) const;
 
     // ---
-    //UFUNCTION(BlueprintCallable, Category="MapBuilder|MapLayer",
-      //        meta = (WorldContext = WorldContextObject))
-    //static UMapRoom *MAKE(UObject *WorldContextObject,
+    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoom",
+              meta = (WorldContext = WorldContextObject))
+    static UMapRoom *MAKE(UObject *WorldContextObject, const int RoomWidth,
+                          const FIntPoint RoomStart, const FIntPoint RoomFinish, 
+                          const int RoomGlobalPosition, const FRoomCoordinates RoomCoordinates);
     
     // ---
     virtual void PostEditChangeProperty(FPropertyChangedEvent &PropertyChangedEvent) override;

@@ -1,9 +1,10 @@
 ﻿#pragma once
 
 #include "Engine/EngineTypes.h"
+#include "../Room/MapRoom.h"
 
 template<typename ValueType>
-struct TMapKeyFuncIntP : TDefaultMapKeyFuncs<int *, ValueType, false>
+struct TMapKeyFuncIntPtr : TDefaultMapKeyFuncs<int *, ValueType, false>
 {
     static FORCEINLINE bool Matches(const int *A, const int *B)
     {
@@ -17,21 +18,21 @@ struct TMapKeyFuncIntP : TDefaultMapKeyFuncs<int *, ValueType, false>
 };
 
 template<typename ValueType>
-struct TMapKeyFuncIntPointP : TDefaultMapKeyFuncs<FIntPoint *, ValueType, false>
+struct TMapKeyFuncRoomCoordinatesPtr : TDefaultMapKeyFuncs<FRoomCoordinates *, ValueType, false>
 {
-    static FORCEINLINE bool Matches(const FIntPoint *A, const FIntPoint *B)
+    static FORCEINLINE bool Matches(const FRoomCoordinates *A, const FRoomCoordinates *B)
     {
         return *A == *B; // match keys
     }
  
-    static FORCEINLINE uint32 GetKeyHash(const FIntPoint *Key)
+    static FORCEINLINE uint32 GetKeyHash(const FRoomCoordinates *Key)
     {
         return GetTypeHash(Key);
     }
 };
 
 template<typename ValueType>
-struct TMultiMapKeyFuncIntPointP : TDefaultMapKeyFuncs<FIntPoint *, ValueType, true>
+struct TMultiMapKeyFuncIntPointPtr : TDefaultMapKeyFuncs<FIntPoint *, ValueType, true>
 {
     static FORCEINLINE bool Matches(const FIntPoint *A, const FIntPoint *B)
     {

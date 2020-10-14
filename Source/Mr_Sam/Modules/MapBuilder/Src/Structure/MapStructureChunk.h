@@ -21,7 +21,7 @@ struct MR_SAM_API FMapStructureChunk
     FString Id = "None";
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    int Order = C_Random;
+    int Order = I_Random;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     int Width = 0;

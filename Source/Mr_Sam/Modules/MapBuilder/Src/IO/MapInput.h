@@ -53,10 +53,26 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults")
     int BorderSize;
 
+    // Default items
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults")
+    TSubclassOf<UMapItem> WallItem;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults")
+    TSubclassOf<UMapItem> WallWithHoleItem;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults")
+    TSubclassOf<UMapItem> StepsItem;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults")
+    TSubclassOf<UMapItem> DoorItem;
+
     // Content
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Content")
     TArray<TSubclassOf<UMapStructure>> Structures; 
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Content")
-    TArray<TSubclassOf<UMapLayer>> Layers;  
+    TArray<TSubclassOf<UMapLayer>> Layers; 
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Content")
+    TSubclassOf<UMapLayer> DefaultLayer; 
 };

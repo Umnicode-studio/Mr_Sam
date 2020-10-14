@@ -15,8 +15,9 @@ UCLASS(BlueprintType)
 class MR_SAM_API UMapRoomArray : public UMapObject {
     GENERATED_BODY()
 
-    TMap <int *, int, FDefaultSetAllocator, TMapKeyFuncIntP<int>> GlobalPositionRefsBook;
-    TMap <FIntPoint *, int, FDefaultSetAllocator, TMapKeyFuncIntPointP<int>> CoordinatesRefsBook;
+    TMap <int *, int, FDefaultSetAllocator, TMapKeyFuncIntPtr<int>> GlobalPositionRefsBook;
+    TMap <FRoomCoordinates *, int, FDefaultSetAllocator,
+                              TMapKeyFuncRoomCoordinatesPtr<int>> CoordinatesRefsBook;
     
     void LinkRoom(UMapRoom *Room);
     bool FixBrokenLinks(const bool Remove = false); // Work around that can help update pointers in
@@ -47,11 +48,11 @@ public:
     bool RemoveRoomByGlobalPosition(int GlobalPosition);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
-    bool RemoveRoomByCoordinates(FIntPoint Coordinates); 
+    bool RemoveRoomByCoordinates(FRoomCoordinates Coordinates); 
 
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
-    int GetSize() const;
+    int Num() const;
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
     bool Empty() const;
@@ -64,7 +65,7 @@ public:
     UMapRoom *GetRoomByGlobalPosition(int GlobalPosition);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
-    UMapRoom *GetRoomByCoords(FIntPoint Coordinates);
+    UMapRoom *GetRoomByCoordinates(FRoomCoordinates Coordinates);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
     TArray <UMapRoom *> GetRoomsOnFloor(int Floor);  

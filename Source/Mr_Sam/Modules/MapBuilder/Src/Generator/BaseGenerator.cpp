@@ -9,37 +9,48 @@ UBaseGenerator::UBaseGenerator()
     PrimaryComponentTick.bCanEverTick = false;
 }
 
-
+// API:
 UMapOutput *UBaseGenerator::Generate(UObject *WorldContextObject,
                                              TSubclassOf<UMapInput> InputClass) {
     // Default generator
     UMapOutput *Output = UMapOutput::MAKE(WorldContextObject, InputClass);
-
-    if (!IsValid(Output)) return nullptr;
-
-    Output->IsGeneratedSuccessfully = true;
-
-    this->Init(Output);
     
-    this->GenerateRooms(Output);
-    this->GeneratePasses(Output);
-    this->SetRoomFlags(Output);
-    this->PlaceStructures(Output);
+    if (IsValid(Output))
+    {
+        Output->IsGeneratedSuccessfully = this->Init(Output);
 
-    this->CleanUp(Output);
+        if (Output->IsGeneratedSuccessfully)
+        {
+            this->GenerateRooms(Output);
+            this->GeneratePasses(Output);
+            this->SetRoomFlags(Output);
+            this->PlaceStructures(Output);
 
-    return Output;
+            this->CleanUp(Output);
+        }else
+        {
+            if (GEngine)
+            {
+                GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Error init MapOutput");
+            }
+        }
+        return Output;
+    }
+
+    return nullptr;
 }
 
-void UBaseGenerator::Init(UMapOutput* Output)
+// ---
+bool UBaseGenerator::Init(UMapOutput* Output)
 {
-    
+    return false;
 }
 void UBaseGenerator::CleanUp(UMapOutput* Output)
 {
     
 }
 
+// ---
 void UBaseGenerator::GenerateRooms(UMapOutput* Output)
 {
     
@@ -57,6 +68,7 @@ void UBaseGenerator::PlaceStructures(UMapOutput* Output)
     
 }
 
+// ---
 void UBaseGenerator::BeginPlay()
 {
     Super::BeginPlay();

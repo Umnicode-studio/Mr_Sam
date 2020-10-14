@@ -6,6 +6,8 @@
 
 #include "CoreMinimal.h"
 
+#include "Engine/StaticMeshActor.h"
+
 #include "../Utils/Constants.h"
 #include "../Layer/MapLayer.h"
 
@@ -22,36 +24,14 @@ enum EItemLocation {
     L_Right   UMETA(DisplayName="Right")
 };
 
-UCLASS()
-class MR_SAM_API UMapItemOutput : public UMapObject {
-    GENERATED_BODY()
-public:
-    UMapItemOutput();
-
-    // Properties:
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    FString Id = "None";
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    FIntPoint Position;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    FIntPoint Size;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    TArray<UMapLayer *> Layers;
-
-    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutput", meta = (WorldContext = WorldContextObject))
-    static UMapItemOutput *MAKE(UObject *WorldContextObject, const FString NId,
-                                const FIntPoint NPosition, const FIntPoint NSize,
-                                TArray<TSubclassOf<UMapLayer>> NLayers);
-};
-
 UCLASS(Blueprintable)
-class MR_SAM_API UMapItemInput : public UMapObject {
+class MR_SAM_API UMapItem : public UMapObject {
     GENERATED_BODY()
 public:
-    UMapItemInput();
+    UMapItem();
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Properties")
+    TSubclassOf<AActor> ActorClass;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     FString Id = "None";
@@ -63,17 +43,31 @@ public:
     FIntPoint Size;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    TArray<TSubclassOf<UMapLayer>> LayersUse;
+    TArray<TSubclassOf<UMapLayer>> Layers;
+
+    // Additional variable that show us does this item is tile.
+    // Only works with change in editor
+    UPROPERTY(VisibleAnywhere, Category="Properties")
+    bool IsMapTile = false;
 
     // API:
-    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemInput",
+    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItem",
         meta = (WorldContext = WorldContextObject))
     bool Place(UObject *WorldContextObject, FIntPoint NewPosition, UMapOutput *Output) const;
 
-    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemInput",
+    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItem",
         meta = (WorldContext = WorldContextObject))
-    static bool CreateAndPlace(UObject *WorldContextObject, TSubclassOf<UMapItemInput> ItemClass,
+    static bool CreateAndPlace(UObject *WorldContextObject, TSubclassOf<UMapItem> ItemClass,
         FIntPoint ItemPosition, UMapOutput *Output);
-
+    
+    // ---
+    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItem",
+        meta = (WorldContext = WorldContextObject))
+    static UMapItem *MAKE(UObject *WorldContextObject, TSubclassOf<AActor> ItemActorClass,
+                          const FString ItemId,
+                          const TEnumAsByte<EItemLocation> ItemLocation,
+                          const FIntPoint ItemSize, TArray<TSubclassOf<UMapLayer>> ItemLayers);
+    
+    // ---
     virtual void PostEditChangeProperty(FPropertyChangedEvent &PropertyChangedEvent) override;
 };

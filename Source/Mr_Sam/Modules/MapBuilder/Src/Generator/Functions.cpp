@@ -33,18 +33,19 @@ TArray<FRoomNeighbor> UGeneratorUtils::GetRoomNeighbors(UMapRoom *Room, UMapOutp
     if (IsValid(Room) && IsValid(Output) && IsValid(Output->Rooms)){
         // Left
         UMapRoom *Temp = Output->Rooms->GetRoomByGlobalPosition(Room->GlobalPosition - 1);
-        if (Temp && Temp->Coordinates.Y == Room->Coordinates.Y){
+        if (Temp && Temp->Coordinates.Floor == Room->Coordinates.Floor){
             Neighbors.Add(MAKE_FRoomNeighbor(S_Left, Temp));
         }
 
         // Right
         Temp = Output->Rooms->GetRoomByGlobalPosition(Room->GlobalPosition + 1);
-        if (Temp && Temp->Coordinates.Y == Room->Coordinates.Y){
+        if (Temp && Temp->Coordinates.Floor == Room->Coordinates.Floor){
             Neighbors.Add(MAKE_FRoomNeighbor(S_Right, Temp));
         }
 
         // Up
-        TArray<UMapRoom *> RoomsOnFloor = Output->Rooms->GetRoomsOnFloor(Room->Coordinates.Y - 1);
+        TArray<UMapRoom *> RoomsOnFloor = Output->Rooms->GetRoomsOnFloor(
+                                                             Room->Coordinates.Floor - 1);
         for (UMapRoom *NRoom : RoomsOnFloor){
             if (IsValid(NRoom)) {
                 if (Room->Start.X <= NRoom->Finish.X && Room->Finish.X >= NRoom->Start.X){
@@ -54,7 +55,7 @@ TArray<FRoomNeighbor> UGeneratorUtils::GetRoomNeighbors(UMapRoom *Room, UMapOutp
         }
 
         // Down
-        RoomsOnFloor = Output->Rooms->GetRoomsOnFloor(Room->Coordinates.Y + 1);
+        RoomsOnFloor = Output->Rooms->GetRoomsOnFloor(Room->Coordinates.Floor + 1);
         for (UMapRoom *NRoom : RoomsOnFloor){
             if (IsValid(NRoom)) {
                 if (Room->Start.X <= NRoom->Finish.X && Room->Finish.X >= NRoom->Start.X){

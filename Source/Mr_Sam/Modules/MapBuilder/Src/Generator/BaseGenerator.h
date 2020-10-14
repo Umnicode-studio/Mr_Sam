@@ -19,20 +19,24 @@ class MR_SAM_API UBaseGenerator : public UActorComponent{
 public:
     UBaseGenerator();
 
+    // API:
     UFUNCTION(BlueprintCallable, Category="MapBuilder|Generator",
         meta = (WorldContext = WorldContextObject))
     virtual UMapOutput *Generate(UObject *WorldContextObject,
                                            TSubclassOf<UMapInput> InputClass);
     
 protected:
-    virtual void Init(UMapOutput *Output);
+    // ---
+    virtual bool Init(UMapOutput *Output);
     virtual void CleanUp(UMapOutput *Output);
-    
+
+    // ---
     virtual void GenerateRooms(UMapOutput *Output);
     virtual void GeneratePasses(UMapOutput *Output);
     virtual void SetRoomFlags(UMapOutput *Output);
     virtual void PlaceStructures(UMapOutput *Output);
 
+    // ---
     virtual void BeginPlay() override;
     
 public:	

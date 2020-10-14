@@ -10,8 +10,9 @@
 #include "../Layer/MapLayer.h"
 
 #include "../Room/MapRoomArray.h"
-#include "Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputArray.h"
+#include "../Item/MapItemOutputArray.h"
 
+#include "../Utils/Structures/GeneratorData.h"
 
 #include "MapOutput.generated.h"
 
@@ -27,22 +28,25 @@ public:
     
     // Properties:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    int FloorsCount = 0;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     bool IsGeneratedSuccessfully = false;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     UMapInput *Input = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    UMapItemOutputArray *Items = nullptr;
+    int FloorsCount = 0;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
+    FGeneratorData GeneratorData; 
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Arrays")
+    UMapItemOutputArray *Items = nullptr;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Arrays")
     UMapRoomArray *Rooms = nullptr;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    TArray<UMapLayer *> Layers; 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Arrays")
+    TArray<UMapLayer *> Layers;
    
     // API:
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapOutput")
@@ -90,6 +94,8 @@ public:
         
                 Output->Rooms = NewObject<UMapRoomArray>(WorldContextObject);
                 Output->Items = NewObject<UMapItemOutputArray>(WorldContextObject);
+
+                Output->GeneratorData = FGeneratorData();
         
                 return Output;
             }

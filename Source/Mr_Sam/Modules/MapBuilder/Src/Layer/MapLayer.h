@@ -32,5 +32,6 @@ public:
     // API:
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapLayer",
               meta = (WorldContext = WorldContextObject))
-    static UMapLayer *MAKE(UObject *WorldContextObject, const FString Layer_Id, const int Layer_ZOffset);
+    static UMapLayer *MAKE(UObject *WorldContextObject, const FString LayerId,
+                           const int LayerZOffset);
 };

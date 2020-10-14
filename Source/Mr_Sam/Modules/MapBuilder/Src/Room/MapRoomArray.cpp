@@ -76,7 +76,7 @@ bool UMapRoomArray::RemoveRoomByGlobalPosition(int GlobalPosition)
 
     return false;
 }
-bool UMapRoomArray::RemoveRoomByCoordinates(FIntPoint Coordinates)
+bool UMapRoomArray::RemoveRoomByCoordinates(FRoomCoordinates Coordinates)
 {
     int *Index = this->CoordinatesRefsBook.Find(&Coordinates);
 
@@ -94,19 +94,19 @@ bool UMapRoomArray::RemoveRoomByCoordinates(FIntPoint Coordinates)
 }
 
 // ---
-int UMapRoomArray::GetSize() const
+int UMapRoomArray::Num() const
 {
     return this->Content.Num();
 }
 bool UMapRoomArray::Empty() const
 {
-    return this->GetSize() == 0;
+    return this->Num() == 0;
 }
 
 // ---
 UMapRoom *UMapRoomArray::GetRoomByIndex(int Index)
 {
-    if (Index > -1 && Index < this->GetSize()){
+    if (Index > -1 && Index < this->Num()){
         return this->Content[Index];
     }
 
@@ -122,7 +122,7 @@ UMapRoom *UMapRoomArray::GetRoomByGlobalPosition(int GlobalPosition)
 
     return nullptr;
 }
-UMapRoom *UMapRoomArray::GetRoomByCoords(FIntPoint Coordinates)
+UMapRoom *UMapRoomArray::GetRoomByCoordinates(FRoomCoordinates Coordinates)
 {
     int *Index = this->CoordinatesRefsBook.Find(&Coordinates);
 
@@ -137,7 +137,7 @@ TArray<UMapRoom*> UMapRoomArray::GetRoomsOnFloor(int Floor)
     TArray<UMapRoom *> Rooms;
 
     for (int x = 0; ; x++){
-        UMapRoom *Temp = this->GetRoomByCoords({x, Floor});
+        UMapRoom *Temp = this->GetRoomByCoordinates({x, Floor});
         if (!Temp) break; // If we get the last room on the floor
 
         Rooms.Add(Temp);

@@ -1,161 +1,251 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="750ec196-a4a9-4403-bbb6-55b30a85cc82" name="Default Changelist" comment="" />
+    <list default="true" id="750ec196-a4a9-4403-bbb6-55b30a85cc82" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutput.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutput.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Structures/GeneratorData.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/UtilsFunctions.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/UtilsFunctions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Mr_Sam/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Mr_Sam/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Mr_Sam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Mr_Sam/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Game/Stage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Game/Stage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/Items/I_TestItem.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Items/I_TestItem.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/LevelsData/Lvl_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/LevelsData/Lvl_01.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Worlds/L_Game.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Worlds/L_Game.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Worlds/L_Game_BuiltData.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Worlds/L_Game_BuiltData.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/StaticActor.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/StaticActor.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Game/Stage/Stage.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Game/Stage/Stage.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Game/Stage/Stage.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Game/Stage/Stage.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/BaseGenerator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/BaseGenerator.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/BaseGenerator.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/BaseGenerator.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/Functions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/Functions.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/IO/MapInput.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/IO/MapInput.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/IO/MapOutput.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/IO/MapOutput.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItem.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputArray.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputArray.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputArray.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputArray.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Layer/MapLayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Layer/MapLayer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/MapGenerator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/MapGenerator.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/MapGenerator.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/MapGenerator.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoom.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoom.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoom.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoom.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoomArray.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoomArray.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoomArray.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoomArray.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructureChunk.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructureChunk.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructureChunkContent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructureChunkContent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Constants.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Constants.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/MapKeyFunc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/MapKeyFunc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Sides.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Structures/Sides.h" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/IO/MapInput.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/OnlineSubsystemUtils/Source/OnlineSubsystemUtils/Classes/AchievementBlueprintLibrary.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/LevelTransit/LevelTransit.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/BaseGenerator.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/BaseGenerator.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoom.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/LevelTransit/LevelTransit.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/VirtualProductionUtilities/Source/VPBookmark/Public/VPBookmarkBlueprintLibrary.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/CoreUObject/Public/UObject/Class.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/Libraries/Range.hpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/OnlineSubsystemOculus/Source/Private/OnlineAchievementsInterfaceOculus.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Core/Public/Math/IntPoint.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/OnlineSubsystemUtils/Source/OnlineSubsystemUtils/Private/JoinSessionCallbackProxy.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Developer/AnimationSharing/Source/AnimationSharing/Private/AnimationSharingManager.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/Android/OnlineSubsystemGameCircle/Source/OnlineSubsystemGameCircle/Private/OnlineAchievementsInterfaceGameCircle.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/AVEncoder/Private/Microsoft/Windows/ThirdParty/AmdAmf/components/ZCamLiveStream.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Core/Public/Containers/Set.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Runtime/MixedRealityCaptureFramework/Source/MixedRealityCaptureFramework/Public/MrcUtilLibrary.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/MapGenerator.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Intermediate/Build/Win64/UE4Editor/Inc/Mr_Sam/MapLayer.gen.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoom.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Runtime/Database/RemoteDatabaseSupport/Source/RemoteDatabaseSupport/Private/RemoteDatabaseConnection.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructure.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Shaders/Private/CubemapCommon.ush" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Core/Public/Containers/Map.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/AIModule/Classes/BehaviorTree/BehaviorTreeManager.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/MapGenerator.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Layer/MapLayer.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputArray.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputArray.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/IO/MapOutput.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Runtime/Synthesis/Source/Synthesis/Private/EpicSynth1.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItem.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItem.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Core/Public/Delegates/IDelegateInstance.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/MapObject.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Game/Stage/Stage.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Game/Stage/Stage.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Sides.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Shaders/Private/LPVPropagate.usf" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/GeometryCollectionPlugin/Source/GeometryCollectionEditor/Private/GeometryCollection/GeometryCollectionConversion.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Constants.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/OnlineSubsystemNull/Source/Private/OnlineAchievementsInterfaceNull.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Core/Public/Math/Plane.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Layer/MapLayer.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Compositing/Composure/Source/Composure/Private/CompositingElements/CompositingElementOutputs.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoomArray.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/MapKeyFunc.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/Functions.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoomArray.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/Functions.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/AIModule/Private/Perception/AIPerceptionSystem.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/StaticActor.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Registry.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructureChunkContent.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/BaseGenerator.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/BaseGenerator.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputArray.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructure.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructureChunk.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/GameCharacter.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/Inventory.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/GameObject.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Game/FightSystem/ColdWeapon.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Editor/Persona/Private/AnimationEditorPreviewScene.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Structures/GeneratorData.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructure.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructureChunkContent.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/OnlineSubsystemNull/Source/Private/OnlineAchievementsInterfaceNull.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Shaders/Private/LPVPropagate.usf" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/GeometryCache/Source/GeometryCache/Private/GeometryCacheMeshData.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/GameCharacter.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Registry.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Compositing/OpenCVLensDistortion/Source/OpenCVLensDistortion/Private/OpenCVLensDistortionParameters.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Core/Public/Math/Plane.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/Inventory.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/MeshModelingToolset/Source/ModelingComponents/Public/Mechanics/CollectSurfacePathMechanic.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/GameObject.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/WebBrowser/Private/CEF/CEFImeHandler.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/Interaction.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/GeometryProcessing/Source/GeometryAlgorithms/Private/ThirdParty/GTEngine/Mathematics/GteDistCircle3Circle3.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/Inventory.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Compositing/Composure/Source/Composure/Private/CompositingElements/CompositingElementOutputs.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/GameObject.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/Interaction.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/Interaction.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/Inventory.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Game/FightSystem/Weapon.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Runtime/Oculus/OculusVR/Source/OculusHMD/Private/OculusHMD.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Utils/Benchmark.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Developer/Concert/ConcertMain/Source/ConcertTransport/Private/ConcertRemoteEndpoint.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/OnlineSubsystemUtils/Source/OnlineSubsystemUtils/Classes/FindSessionsCallbackProxy.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Utils/Benchmark.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/CoreUObject/Public/UObject/NoExportTypes.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Utils/FrameworkUtils.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Utils/Benchmark.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/Utils/FrameworkUtils.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/ApplicationCore/Private/HoloLens/WindowsGamingInputInterface.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/PlanarCutPlugin/Source/PlanarCut/Private/PlanarCut.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/GeometryProcessing/Source/MeshSolverUtilities/Private/MeshElementLinearizations.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/OnlineSubsystemUtils/Source/OnlineSubsystemUtils/Classes/ShowLoginUICallbackProxy.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/LevelTransit/LevelTransit.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Framework/LevelTransit/LevelTransit.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Editor/MergeActors/Private/MeshInstancingTool/MeshInstancingTool.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/GeometryProcessing/Source/GeometryAlgorithms/Private/ThirdParty/GTEngine/Mathematics/GteIntrHalfspace3Triangle3.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Developer/AnimationSharing/Source/AnimationSharing/Private/AnimationSharingManager.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Developer/Concert/DisasterRecoveryClient/Source/DisasterRecoveryClient/Private/DisasterRecoveryClientModule.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Engine/Classes/AI/NavigationSystemBase.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Runtime/ResonanceAudio/Source/ResonanceAudio/Private/ResonanceAudioCommon.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Core/Public/Math/IntPoint.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Runtime/MixedRealityCaptureFramework/Source/MixedRealityCaptureFramework/Public/MrcUtilLibrary.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Runtime/Database/RemoteDatabaseSupport/Source/RemoteDatabaseSupport/Private/RemoteDatabaseConnection.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Core/Public/Containers/Set.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/OnlineSubsystemOculus/Source/Private/OnlineAchievementsInterfaceOculus.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Core/Public/Containers/Map.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Enterprise/DatasmithImporter/Source/DatasmithImporter/Private/DatasmithTextureImporter.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/GeometryProcessing/Source/GeometryAlgorithms/Private/ThirdParty/GTEngine/LowLevel/GteLogToFile.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Runtime/Synthesis/Source/Synthesis/Private/EpicSynth1.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Runtime/AR/Google/GoogleARCore/Source/GoogleARCoreRendering/Public/MaterialExpressionGoogleARCorePassthroughCamera.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/GeometryCollectionPlugin/Source/GeometryCollectionEditor/Private/GeometryCollection/GeometryCollectionConversion.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/PlanarCutPlugin/Source/PlanarCut/Private/PlanarCut.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Media/Public/IMediaOverlaySample.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/AIModule/Private/Perception/AIPerceptionSystem.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Engine/Classes/Curves/RealCurve.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/Android/OnlineSubsystemGameCircle/Source/OnlineSubsystemGameCircle/Private/OnlineAchievementsInterfaceGameCircle.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/CoreUObject/Public/UObject/NoExportTypes.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/VirtualProductionUtilities/Source/VPBookmark/Public/VPBookmarkBlueprintLibrary.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/ApplicationCore/Private/HoloLens/WindowsGamingInputInterface.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/VirtualProductionUtilities/Source/VPUtilities/Public/VPBlueprintLibrary.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/CoreUObject/Public/UObject/Class.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Shaders/Private/HairStrands/HairStrandsMeshProjection.usf" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/AVEncoder/Private/Microsoft/Windows/ThirdParty/AmdAmf/components/ZCamLiveStream.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Editor/Kismet/Private/SMyBlueprint.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/OnlineSubsystemUtils/Source/OnlineSubsystemUtils/Classes/FindSessionsCallbackProxy.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Shaders/Private/CubemapCommon.ush" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Game/Stage/Stage.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Game/Stage/Stage.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/AIModule/Classes/BehaviorTree/BehaviorTreeManager.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/OnlineSubsystemUtils/Source/OnlineSubsystemUtils/Classes/ShowLoginUICallbackProxy.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/OnlineSubsystemUtils/Source/OnlineSubsystemUtils/Classes/LogoutCallbackProxy.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/OnlineSubsystemUtils/Source/OnlineSubsystemUtils/Classes/AchievementBlueprintLibrary.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/IO/MapInput.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/IO/MapOutput.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/MapGenerator.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Game/FightSystem/ColdWeapon.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Game/FightSystem/Weapon.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoom.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItem.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Developer/Concert/ConcertMain/Source/ConcertTransport/Private/ConcertRemoteEndpoint.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/MapGenerator.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Runtime/Oculus/OculusVR/Source/OculusHMD/Private/OculusHMD.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Layer/MapLayer.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItem.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoom.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Core/Public/Delegates/IDelegateInstance.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/Libraries/Range.hpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Constants.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Online/OnlineSubsystemUtils/Source/OnlineSubsystemUtils/Private/JoinSessionCallbackProxy.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/MapKeyFunc.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoomArray.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/GeometryProcessing/Source/MeshSolverUtilities/Private/MeshElementLinearizations.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutput.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoomArray.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/UtilsFunctions.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutput.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Layer/MapLayer.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/Functions.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/MapObject.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Structures/Sides.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Plugins/Experimental/GeometryProcessing/Source/GeometryAlgorithms/Private/ThirdParty/GTEngine/Mathematics/GteTetrahedron3.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/UtilsFunctions.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputArray.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Sides.hpp" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structures/MapStructureChunkContent.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structures/MapStructureChunk.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structures/MapStructure.hpp" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structures/MapStructure.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/Libraries/Range.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Framework/Utils/Benchmark.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Registry.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Framework/LevelTransit/LevelTransit.cpp" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Framework/LevelTransit/LevelTransit.h" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/Libraries/CustomMap.h" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/MapKeyFunc.cpp" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/GameObject.h" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/GameObject.cpp" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Game/Stage/Stage.cpp" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/GameCharacter.h" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/Inventory.cpp" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/Interaction.h" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Framework/Core/Components/Inventory.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Game/Stage/Stage.h" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Framework/Utils/Benchmark.cpp" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputVector.cpp" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputVector.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/MapKeyFunc.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/IO/MapInput.h" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/MapObject.h" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Sides.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItem.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoomArray.cpp" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputArray.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoomArray.h" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputArray.cpp" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/Functions.cpp" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/Functions.h" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/MapGenerator.cpp" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/MapGenerator.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/BaseGenerator.cpp" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/BaseGenerator.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/MapGenerator.cpp" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Constants.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructureChunkContent.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructureChunk.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/IO/MapOutput.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItem.cpp" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoom.cpp" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Layer/MapLayer.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Layer/MapLayer.cpp" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructure.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoom.h" />
-        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/MapGenerator.h" />
         <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructure.cpp" />
+        <option value="$PROJECT_DIR$/readme" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/Functions.cpp" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoomArray.cpp" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Layer/MapLayer.cpp" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoom.cpp" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoomArray.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/MapKeyFunc.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/BaseGenerator.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Generator/BaseGenerator.cpp" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Layer/MapLayer.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/IO/MapInput.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/MapGenerator.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/IO/MapOutput.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Structures/GeneratorData.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutputArray.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapTile.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapTile.cpp" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItem.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructureChunk.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Functions.cpp" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Functions.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Room/MapRoom.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Structure/MapStructureChunkContent.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/UtilsFunctions.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/Constants.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItem.cpp" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutput.cpp" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Item/MapItemOutput.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/Utils/UtilsFunctions.cpp" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Game/Stage/Stage.h" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Game/Stage/Stage.cpp" />
+        <option value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder/Src/MapGenerator.cpp" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1i2p693lOZS2YtEhfRC69vjX077" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34971097" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.2998555" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Source/Mr_Sam/Modules/MapBuilder" />
+    <property name="settings.editor.selected.configurable" value="aws" />
   </component>
   <component name="RunManager" selected="C++ Project.Mr_Sam">
     <configuration name="Mr_Sam" type="CppProject" factoryName="C++ Project">
@@ -384,6 +474,12 @@
       <workItem from="1601750129641" duration="18761000" />
       <workItem from="1601885476357" duration="4256000" />
       <workItem from="1601901802215" duration="17179000" />
+      <workItem from="1602169595140" duration="11548000" />
+      <workItem from="1602242359807" duration="6709000" />
+      <workItem from="1602351165626" duration="11402000" />
+      <workItem from="1602602784772" duration="24000" />
+      <workItem from="1602679846979" duration="8549000" />
+      <workItem from="1602695227373" duration="915000" />
     </task>
     <servers />
   </component>
@@ -392,33 +488,138 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="609" y="331" key="#Custom_Plugin_Repositories" timestamp="1602688175099">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state x="609" y="331" key="#Custom_Plugin_Repositories/0.0.1458.864@0.0.1458.864" timestamp="1602688175099" />
+    <state x="364" y="140" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602184783675">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state x="364" y="140" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1458.864@0.0.1458.864" timestamp="1602184783675" />
     <state x="683" y="187" key="FileChooserDialogImpl" timestamp="1601912792882">
       <screen x="0" y="0" width="1458" height="864" />
     </state>
     <state x="683" y="187" key="FileChooserDialogImpl/0.0.1458.864@0.0.1458.864" timestamp="1601912792882" />
-    <state x="9" y="-18" width="1411" height="774" maximized="true" key="dock-window-1" timestamp="1601892135165">
+    <state x="608" y="330" width="458" height="203" key="Github.ShareDialog" timestamp="1602169680891">
       <screen x="0" y="0" width="1458" height="864" />
     </state>
-    <state x="9" y="-18" width="1411" height="774" maximized="true" key="dock-window-1/0.0.1458.864/1920.0.1920.1040@1920.0.1920.1040" timestamp="1601892135165" />
+    <state x="608" y="330" width="458" height="203" key="Github.ShareDialog/0.0.1458.864@0.0.1458.864" timestamp="1602169680891" />
+    <state x="453" y="138" key="Github.UntrackedFilesDialog" timestamp="1602169736407">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state x="453" y="138" key="Github.UntrackedFilesDialog/0.0.1458.864@0.0.1458.864" timestamp="1602169736407" />
+    <state width="1415" height="304" key="GridCell.Tab.0.bottom" timestamp="1602597484110">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.0.bottom/0.0.1458.864@0.0.1458.864" timestamp="1602597484110" />
+    <state width="1415" height="304" key="GridCell.Tab.0.center" timestamp="1602597484110">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.0.center/0.0.1458.864@0.0.1458.864" timestamp="1602597484110" />
+    <state width="1415" height="304" key="GridCell.Tab.0.left" timestamp="1602597484107">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.0.left/0.0.1458.864@0.0.1458.864" timestamp="1602597484107" />
+    <state width="1415" height="304" key="GridCell.Tab.0.right" timestamp="1602597484110">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.0.right/0.0.1458.864@0.0.1458.864" timestamp="1602597484110" />
+    <state width="1415" height="304" key="GridCell.Tab.1.bottom" timestamp="1602597484111">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.1.bottom/0.0.1458.864@0.0.1458.864" timestamp="1602597484111" />
+    <state width="1415" height="304" key="GridCell.Tab.1.center" timestamp="1602597484111">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.1.center/0.0.1458.864@0.0.1458.864" timestamp="1602597484111" />
+    <state width="1415" height="304" key="GridCell.Tab.1.left" timestamp="1602597484111">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.1.left/0.0.1458.864@0.0.1458.864" timestamp="1602597484111" />
+    <state width="1415" height="304" key="GridCell.Tab.1.right" timestamp="1602597484111">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.1.right/0.0.1458.864@0.0.1458.864" timestamp="1602597484111" />
+    <state width="1415" height="304" key="GridCell.Tab.2.bottom" timestamp="1602597484112">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.2.bottom/0.0.1458.864@0.0.1458.864" timestamp="1602597484112" />
+    <state width="1415" height="304" key="GridCell.Tab.2.center" timestamp="1602597484111">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.2.center/0.0.1458.864@0.0.1458.864" timestamp="1602597484111" />
+    <state width="1415" height="304" key="GridCell.Tab.2.left" timestamp="1602597484111">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.2.left/0.0.1458.864@0.0.1458.864" timestamp="1602597484111" />
+    <state width="1415" height="304" key="GridCell.Tab.2.right" timestamp="1602597484112">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.2.right/0.0.1458.864@0.0.1458.864" timestamp="1602597484112" />
+    <state width="1415" height="304" key="GridCell.Tab.3.bottom" timestamp="1602597484115">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.3.bottom/0.0.1458.864@0.0.1458.864" timestamp="1602597484115" />
+    <state width="1415" height="304" key="GridCell.Tab.3.center" timestamp="1602597484113">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.3.center/0.0.1458.864@0.0.1458.864" timestamp="1602597484113" />
+    <state width="1415" height="304" key="GridCell.Tab.3.left" timestamp="1602597484113">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.3.left/0.0.1458.864@0.0.1458.864" timestamp="1602597484113" />
+    <state width="1415" height="304" key="GridCell.Tab.3.right" timestamp="1602597484114">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state width="1415" height="304" key="GridCell.Tab.3.right/0.0.1458.864@0.0.1458.864" timestamp="1602597484114" />
+    <state x="238" y="77" key="SettingsEditor" timestamp="1602695999343">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state x="238" y="77" key="SettingsEditor/0.0.1458.864@0.0.1458.864" timestamp="1602695999343" />
+    <state x="322" y="165" key="Vcs.Push.Dialog.v2" timestamp="1602696310331">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state x="322" y="165" key="Vcs.Push.Dialog.v2/0.0.1458.864@0.0.1458.864" timestamp="1602696310331" />
+    <state x="-671" y="-17" width="1388" height="774" maximized="true" key="dock-window-1" timestamp="1602234591088">
+      <screen x="0" y="0" width="1458" height="864" />
+    </state>
+    <state x="-671" y="-17" width="1388" height="774" maximized="true" key="dock-window-1/0.0.1458.864/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602234591088" />
     <state x="0" y="0" width="1472" height="871" key="dock-window-2" timestamp="1601893862479">
       <screen x="0" y="0" width="1458" height="864" />
     </state>
     <state x="0" y="0" width="1472" height="871" key="dock-window-2/0.0.1458.864@0.0.1458.864" timestamp="1601893862479" />
-    <state x="411" y="165" width="982" height="592" key="find.popup" timestamp="1602146713219">
+    <state x="411" y="165" width="1017" height="592" key="find.popup" timestamp="1602358010629">
       <screen x="0" y="0" width="1458" height="864" />
     </state>
-    <state x="411" y="165" width="982" height="592" key="find.popup/0.0.1458.864@0.0.1458.864" timestamp="1602146713219" />
+    <state x="2444" y="206" width="1297" height="740" key="find.popup/0.0.1458.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1602244354125" />
+    <state x="411" y="165" width="1017" height="592" key="find.popup/0.0.1458.864@0.0.1458.864" timestamp="1602358010628" />
     <state x="386" y="197" key="run.anything.popup" timestamp="1602104571102">
       <screen x="0" y="0" width="1458" height="864" />
     </state>
     <state x="386" y="197" key="run.anything.popup/0.0.1458.864@0.0.1458.864" timestamp="1602104571102" />
-    <state x="392" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1602086585289">
+    <state x="392" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1602228375517">
       <screen x="0" y="0" width="1458" height="864" />
     </state>
-    <state x="392" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1458.864@0.0.1458.864" timestamp="1602086585289" />
+    <state x="392" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1458.864@0.0.1458.864" timestamp="1602228375517" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

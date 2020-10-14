@@ -3,60 +3,34 @@
 //
 
 #include "MapItem.h"
-
 #include "../IO/MapOutput.h"
 
-// Output
-UMapItemOutput::UMapItemOutput()
+
+UMapItem::UMapItem()
 {
     
 }
 
-UMapItemOutput* UMapItemOutput::MAKE(UObject* WorldContextObject, 
-                                     const FString NId, const FIntPoint NPosition,
-                                     const FIntPoint NSize, TArray<TSubclassOf<UMapLayer>> NLayers)
-{
-    if (IsValid(WorldContextObject))
-    {
-        UMapItemOutput *Item = NewObject<UMapItemOutput>(WorldContextObject);
-
-        if (IsValid(Item))
-        {
-            Item->Id = NId;
-
-            Item->Position = NPosition;
-            Item->Size = NSize;
-
-            // Link layers
-            for (auto LayerClass : NLayers)
-            {
-                if (IsValid(LayerClass))
-                {
-                    Item->Layers.Add(LayerClass.GetDefaultObject());
-                }
-            }
-
-            return Item;
-        }
-    }
-
-    return nullptr;
-}
-
-
-// Input
-UMapItemInput::UMapItemInput()
-{
-    
-}
-
-bool UMapItemInput::Place(UObject *WorldContextObject, FIntPoint NewPosition, UMapOutput *Output) const
+// API:
+bool UMapItem::Place(UObject *WorldContextObject, FIntPoint NewPosition,
+                          UMapOutput *Output) const
 {
     // Add item to output
-    if (IsValid(Output) && IsValid(Output->Items))
+    if (IsValid(this->ActorClass) && IsValid(Output) && IsValid(Output->Items))
     {
-        Output->Items->AddExistItem(UMapItemOutput::MAKE(WorldContextObject, this->Id, NewPosition,
-            this->Size, this->LayersUse));
+        // Create layers
+        TArray<UMapLayer *> ItemLayers;
+        for (auto &LayerClass : this->Layers)
+        {
+            if (IsValid(LayerClass))
+            {
+                ItemLayers.Add(LayerClass.GetDefaultObject());
+            }
+        }
+        
+        Output->Items->AddExistItem(UMapItemOutput::MAKE(WorldContextObject,
+                                    NewObject<AActor>(WorldContextObject, this->ActorClass),
+                                    this->Id, NewPosition, this->Size, ItemLayers));
         
         return true;
     }
@@ -64,17 +38,15 @@ bool UMapItemInput::Place(UObject *WorldContextObject, FIntPoint NewPosition, UM
     return false;
 }
 
-bool UMapItemInput::CreateAndPlace(UObject *WorldContextObject,
-                                   TSubclassOf<UMapItemInput> ItemClass,
+bool UMapItem::CreateAndPlace(UObject *WorldContextObject,
+                                   TSubclassOf<UMapItem> ItemClass,
                                    FIntPoint ItemPosition,
                                    UMapOutput* Output)
 {
     if (IsValid(ItemClass) && IsValid(Output))
     {
-        UMapItemInput *Item = ItemClass.GetDefaultObject();
-        
-        Output->Items->AddExistItem(UMapItemOutput::MAKE(WorldContextObject, Item->Id, ItemPosition,
-            Item->Size, Item->LayersUse));
+        UMapItem *Item = ItemClass.GetDefaultObject();
+        Item->Place(WorldContextObject, ItemPosition, Output);
 
         return true;
     }
@@ -82,20 +54,54 @@ bool UMapItemInput::CreateAndPlace(UObject *WorldContextObject,
     return false;
 }
 
+// ---
+UMapItem* UMapItem::MAKE(UObject* WorldContextObject, TSubclassOf<AActor> ItemActorClass,
+                         const FString ItemId,
+                         const TEnumAsByte<EItemLocation> ItemLocation,
+                         const FIntPoint ItemSize,
+                         TArray<TSubclassOf<UMapLayer>> ItemLayers)
+{
+    if (IsValid(WorldContextObject))
+    {
+        UMapItem *Item = NewObject<UMapItem>(WorldContextObject);
 
-void UMapItemInput::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+        if (IsValid(Item))
+        {
+            Item->ActorClass = ItemActorClass;
+            Item->Id = ItemId;
+            Item->Location = ItemLocation;
+            Item->Size = ItemSize;
+            Item->Layers = ItemLayers;
+
+            return Item;
+        }
+    }
+    return nullptr;
+}
+
+// ---
+void UMapItem::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
     TArray<TSubclassOf<UMapLayer>> UniqueLayers;
-    for (int c = 0; c < this->LayersUse.Num(); c++)
+    for (int c = 0; c < this->Layers.Num(); c++)
     {
-        if (UniqueLayers.Find(this->LayersUse[c]) == INDEX_NONE)
+        if (UniqueLayers.Find(this->Layers[c]) == INDEX_NONE)
         {
-            UniqueLayers.Add(this->LayersUse[c]);
+            UniqueLayers.Add(this->Layers[c]);
         }
         else
         {
-            this->LayersUse.RemoveAt(c);
+            this->Layers.RemoveAt(c);
             c--;
         }
+    }
+
+    if (IsValid(this->ActorClass))
+    {
+        this->IsMapTile = UUtilsFunctions::IsItemMapTile(this->ActorClass.GetDefaultObject());
+    }
+    else
+    {
+        this->IsMapTile = false;
     }
 }

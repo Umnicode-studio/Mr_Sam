@@ -7,7 +7,7 @@
 #include "CoreMinimal.h"
 
 #include "../Item/MapItem.h"
-#include "../Utils/Sides.h"
+#include "../Utils/Structures/Sides.h"
 
 #include "MapStructureChunkContent.generated.h"
 
@@ -18,7 +18,7 @@ struct MR_SAM_API FMapStructureChunkContent
 
     // Properties:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    TArray<TSubclassOf<UMapItemInput>> Items;
+    TArray<TSubclassOf<UMapItem>> Items;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     TArray<FSides> SidesConfig;
@@ -27,7 +27,7 @@ struct MR_SAM_API FMapStructureChunkContent
     {
     }
 
-    FMapStructureChunkContent(const TArray<TSubclassOf<UMapItemInput>> Items,
+    FMapStructureChunkContent(const TArray<TSubclassOf<UMapItem>> Items,
                               const TArray<FSides> SidesConfig)
     {
         this->Items = Items;
