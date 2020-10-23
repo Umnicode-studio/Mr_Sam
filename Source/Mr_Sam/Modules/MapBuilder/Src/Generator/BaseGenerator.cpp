@@ -23,6 +23,9 @@ UMapOutput *UBaseGenerator::Generate(UObject *WorldContextObject,
         {
             this->GenerateRooms(Output);
             this->GeneratePasses(Output);
+
+            if (Output->Input->MergeWalls) this->MergeWalls(Output);
+            
             this->SetRoomFlags(Output);
             this->PlaceStructures(Output);
 
@@ -59,6 +62,12 @@ void UBaseGenerator::GeneratePasses(UMapOutput* Output)
 {
     
 }
+
+void UBaseGenerator::MergeWalls(UMapOutput* Output)
+{
+    
+}
+
 void UBaseGenerator::SetRoomFlags(UMapOutput* Output)
 {
     

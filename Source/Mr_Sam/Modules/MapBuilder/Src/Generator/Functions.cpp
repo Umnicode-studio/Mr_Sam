@@ -4,18 +4,6 @@
 #include "Functions.h"
 
 // API:
-bool UGeneratorUtils::IsBound(FIntPoint Point, FIntPoint AreaPosition, FIntPoint AreaSize)
-{
-    if (Point.X >= AreaPosition.X && Point.X <= AreaPosition.X + (AreaSize.X - 1)) { // check is bound
-        if (Point.Y >= AreaPosition.Y && Point.Y <= AreaPosition.Y + (AreaSize.Y - 1)) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-// ---
 TArray<FRoomNeighbor> UGeneratorUtils::GetRoomNeighbors(UMapRoom *Room, UMapOutput *Output)
 {
     auto MAKE_FRoomNeighbor = [](ESideEnum Side, UMapRoom *Room) -> FRoomNeighbor
@@ -69,37 +57,29 @@ TArray<FRoomNeighbor> UGeneratorUtils::GetRoomNeighbors(UMapRoom *Room, UMapOutp
 }
 
 // ---
-bool UGeneratorUtils::IsStepsHere(const FString StepsId, FIntPoint Position, UMapLayer* Layer,
-                                  UMapOutput* Output)
+bool UGeneratorUtils::IsStepsHere(const FString StepsId, const FIntPoint &Position, UMapOutput* Output)
 {
-    if (IsValid(Layer) && IsValid(Output) && IsValid(Output->Items))
+    if (IsValid(Output) && IsValid(Output->Items))
     {
-        UMapItemOutput *Item = Output->Items->FindItemThatPossesPoint(Position, Layer);
-
-        if (IsValid(Item))
-        {
-            return Item->Id == StepsId;
-        }
+        return Output->Items->FindItemsThatPossesPointById(Position, StepsId).Num() != 0;
     }
 
     return false;
 }
-bool UGeneratorUtils::IsWallHere(const FString WallId, FIntPoint Position, UMapLayer* Layer,
-                                 UMapOutput* Output)
+bool UGeneratorUtils::IsWallHere(const FString WallId, const FIntPoint &Position, UMapOutput* Output)
 {
-    if (IsValid(Layer) && IsValid(Output) && IsValid(Output->Items))
+    if (IsValid(Output) && IsValid(Output->Items))
     {
-        UMapItemOutput *Item = Output->Items->FindItemThatPossesPoint(Position, Layer);
-
-        if (IsValid(Item))
+        if (Position.Y == 5)
         {
-            return Item->Id == WallId;
+            GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::FromInt(Output->Items->FindItemsThatPossesPointById(Position, WallId).Num()));
         }
+        
+        return Output->Items->FindItemsThatPossesPointById(Position, WallId).Num() != 0;
     }
 
     return false;
 }
-
 
 // ---
 

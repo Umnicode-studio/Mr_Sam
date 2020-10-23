@@ -20,6 +20,8 @@ UMapItemOutput* UMapItemOutput::MAKE(UObject* WorldContextObject, AActor *ItemAc
             Item->Id = ItemId;
 
             Item->Position = ItemPosition;
+            Item->Size = ItemSize;
+            
             Item->Layers = ItemLayers;
 
             return Item;

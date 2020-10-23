@@ -7,16 +7,18 @@
 #include "CoreMinimal.h"
 
 #include "MapItemOutput.h"
-#include "../Utils/MapKeyFunc.h"
+#include "../Utils/PtrLess.h"
 
 #include "MapItemOutputArray.generated.h"
 
 UCLASS(BlueprintType)
 class MR_SAM_API UMapItemOutputArray : public UMapObject {
     GENERATED_BODY()
+
+    using FMultiMap = std::multimap <FIntPoint *, int, FPtrLessIntPointPtr>;
+    using FIteratorRange = std::pair <FMultiMap::iterator, FMultiMap::iterator>;
     
-    TMultiMap <FIntPoint *, int, FDefaultSetAllocator,
-                               TMultiMapKeyFuncIntPointPtr<int>> PositionRefsBook;
+    FMultiMap PositionRefsBook;
 
     void LinkItem(UMapItemOutput *Item);
     bool FixBrokenLinks(bool Remove = false); // Work around that can help update pointers in
@@ -32,19 +34,21 @@ public:
     int LastCapacity = 0;
     
     // API:
-    /*UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray",
-     *meta = (WorldContext = WorldContextObject))
-    bool AddItem(UObject *WorldContextObject, TSubclassOf<UMapItemOutput> ItemClass); */
-
-    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")
-    bool AddItem(TSubclassOf<UMapItemOutput> ItemClass);
+    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray", meta = (WorldContext = WorldContextObject))
+    bool AddItem(UObject *WorldContextObject, TSubclassOf<UMapItemOutput> ItemClass);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")
     bool AddExistItem(UMapItemOutput *Item);
     
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")
-    bool RemoveItem(FIntPoint Position, UMapLayer *Layer); 
+    bool RemoveItemByPosition(FIntPoint &Position, UMapLayer *Layer);
+
+    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")
+    bool RemoveItemsById(FIntPoint &Position, const FString Id);
+    
+    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")
+    bool RemoveItemByIndex(int Index);
 
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")
@@ -58,14 +62,20 @@ public:
     UMapItemOutput *GetItemByIndex(int Index);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")
-    TArray <UMapItemOutput *> GetItemsByPosition(FIntPoint Position);
+    TArray <UMapItemOutput *> GetItemsByPosition(FIntPoint &Position);
+
+    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")
+    TArray<UMapItemOutput *> GetItemsByPositionAndId(FIntPoint &Position, const FString &Id);
 
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")
-    UMapItemOutput *FindItem(FIntPoint Position, UMapLayer *Layer);
+    UMapItemOutput *FindItem(FIntPoint &Position, UMapLayer *Layer);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")
-    UMapItemOutput *FindItemThatPossesPoint(FIntPoint Point, UMapLayer *Layer); 
+    UMapItemOutput *FindItemThatPossesPointByLayer(FIntPoint Point, UMapLayer *Layer);
+
+    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")
+    TArray <UMapItemOutput *> FindItemsThatPossesPointById(FIntPoint Point, const FString &Id);
 
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapItemOutputArray")

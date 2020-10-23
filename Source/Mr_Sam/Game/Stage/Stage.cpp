@@ -2,6 +2,28 @@
 
 #include "Stage.h"
 
+FVector AStage::GetActorScaleToTile(const FVector &ActorSize, const FIntPoint &ItemSize) const
+{
+	if (ActorSize == FVector::ZeroVector) return FVector::ZeroVector;
+	
+	return (this->TileSize * FVector(1.0f, ItemSize.X, ItemSize.Y)) / ActorSize;
+}
+float AStage::GetZValueForActor(const TArray<UMapLayer *> &Layers)
+{
+	float Median = 0;
+
+	int c = 0;
+	for (; c < Layers.Num(); c++)
+	{
+		if (IsValid(Layers[c]))
+		{
+			Median += Layers[c]->ZOffset;
+		}
+	}
+
+	return Median / (c + 1);
+}
+
 AStage::AStage()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -41,25 +63,37 @@ bool AStage::LoadStage(UMapOutput* Output)
 			{	
 				if (Item->IsMapTile()) // If map tile
 				{
-					const FVector MeshSize = UFrameworkUtils::GetStaticMeshSize(static_cast <AStaticMeshActor* >
-						                                         (Item->Actor)->GetStaticMeshComponent()->GetStaticMesh());
+					const FVector MeshSize = UFrameworkUtils::GetStaticMeshSize(
+						                     static_cast <AStaticMeshActor* >
+						                        (Item->Actor)->GetStaticMeshComponent()->GetStaticMesh());
+					
+					const FIntPoint ItemPos = Output->Input->Size - Item->Position;
+					FVector ItemLocation = this->GetActorLocation() +
+						                         FVector(GetZValueForActor(Item->Layers),
+						                         	     ItemPos.X * this->TileSize.X,
+						                         	     ItemPos.Y * this->TileSize.Y);
+
+					ItemLocation.Y -= (this->TileSize.Y * Item->Size.X) / 2;
+					ItemLocation.Z -= (this->TileSize.Z * Item->Size.Y);
+
+					// Set item transforms
+					FTransform ItemTransform;
+					
+					ItemTransform.SetLocation(ItemLocation);
+					ItemTransform.SetRotation(FQuat(0, 0, 0, 0));
+					ItemTransform.SetScale3D(this->GetActorScaleToTile(MeshSize, Item->Size));
 					
 					// If item is map tile, we know that Item->Actor is StaticMeshActor
 					AStaticMeshActor *Actor = GetWorld()->SpawnActor<AStaticMeshActor>(
-						                                             Item->Actor->GetClass(),
-						                                             this->GetActorLocation() +
-						                                                     FVector(Item->Position.X * MeshSize.X,
-                                                                                     0,
-                                                                                     Item->Position.Y * MeshSize.Z),
-                                                                     FRotator(0, 0, 0));
+						                                         Item->Actor->GetClass(), ItemTransform);
 						
 					// Attach tile to stage
 					FAttachmentTransformRules Rules(EAttachmentRule::KeepWorld, true);
 					Actor->AttachToActor(this, Rules);
 					
-					Actor->SetMobility(EComponentMobility::Static);
+					Actor->SetMobility(EComponentMobility::Static); 
 					
-					this->StageTiles.Add(Actor);
+					this->StageTiles.Add(Actor); 
 				}
 			}
 		}
@@ -69,7 +103,6 @@ bool AStage::LoadStage(UMapOutput* Output)
 
 	return false;
 }
-
 
 void AStage::BeginPlay()
 {

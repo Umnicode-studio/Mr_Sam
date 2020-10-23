@@ -7,7 +7,7 @@
 #include "CoreMinimal.h"
 
 #include "MapRoom.h"
-#include "../Utils/MapKeyFunc.h"
+#include "../Utils/PtrLess.h"
 
 #include "MapRoomArray.generated.h"
 
@@ -15,9 +15,8 @@ UCLASS(BlueprintType)
 class MR_SAM_API UMapRoomArray : public UMapObject {
     GENERATED_BODY()
 
-    TMap <int *, int, FDefaultSetAllocator, TMapKeyFuncIntPtr<int>> GlobalPositionRefsBook;
-    TMap <FRoomCoordinates *, int, FDefaultSetAllocator,
-                              TMapKeyFuncRoomCoordinatesPtr<int>> CoordinatesRefsBook;
+    std::map <int *, int, FPtrLessIntPtr> GlobalPositionRefsBook;
+    std::map <FRoomCoordinates *, int, FPtrLessRoomCoordinatesPtr> CoordinatesRefsBook;
     
     void LinkRoom(UMapRoom *Room);
     bool FixBrokenLinks(const bool Remove = false); // Work around that can help update pointers in
@@ -33,12 +32,8 @@ public:
     TArray <UMapRoom *> Content;
     
     // API:
-    /*UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray",
-        meta = (WorldContext = WorldContextObject))
-    bool AddRoom(UObject *WorldContextObject, TSubclassOf<UMapRoom> RoomClass); */
-    
-    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
-    bool AddRoom(TSubclassOf<UMapRoom> RoomClass);
+    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray", meta = (WorldContext = WorldContextObject))
+    bool AddRoom(UObject *WorldContextObject, TSubclassOf<UMapRoom> RoomClass);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
     bool AddExistRoom(UMapRoom *Room);
@@ -48,7 +43,10 @@ public:
     bool RemoveRoomByGlobalPosition(int GlobalPosition);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
-    bool RemoveRoomByCoordinates(FRoomCoordinates Coordinates); 
+    bool RemoveRoomByCoordinates(FRoomCoordinates Coordinates);
+
+    UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
+    bool RemoveItemByIndex(int Index);
 
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")

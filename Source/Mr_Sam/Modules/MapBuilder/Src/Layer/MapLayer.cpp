@@ -12,7 +12,7 @@ bool UMapLayer::operator==(const UMapLayer& Right) const
 }
 
 // API:
-UMapLayer* UMapLayer::MAKE(UObject* WorldContextObject, const FString LayerId, const int LayerZOffset)
+UMapLayer* UMapLayer::MAKE(UObject* WorldContextObject, const FString LayerId, const float LayerZOffset)
 {   
     if (IsValid(WorldContextObject))
     {

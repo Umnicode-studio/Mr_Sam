@@ -28,9 +28,11 @@ struct MR_SAM_API FRoomPass{
     {
         this->RoomId = 0;
     }
-    explicit FRoomPass(const int RoomId)
+    explicit FRoomPass(const int RoomId, TEnumAsByte<ESideEnum> PassSide, FIntPoint PassPosition)
     {
         this->RoomId = RoomId;
+        this->Side = PassSide;
+        this->Position = PassPosition;
     }
 };
 
@@ -62,6 +64,12 @@ struct FRoomCoordinates
     {
         this->PositionOnFloor = PositionOnFloor;
         this->Floor = Floor;
+    }
+
+    FString ToString() const
+    {
+        return "Position on floor: " + FString::FromInt(this->PositionOnFloor) + " Floor: " +
+               FString::FromInt(this->Floor);
     }
     
     bool operator== (const FRoomCoordinates &Right) const

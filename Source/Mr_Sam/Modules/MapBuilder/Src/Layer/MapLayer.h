@@ -20,7 +20,7 @@ public:
     FString Id = "None";
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    int ZOffset = 0;
+    float ZOffset = 0;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     bool IsDefault = false;
@@ -33,5 +33,5 @@ public:
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapLayer",
               meta = (WorldContext = WorldContextObject))
     static UMapLayer *MAKE(UObject *WorldContextObject, const FString LayerId,
-                           const int LayerZOffset);
+                           const float LayerZOffset);
 };

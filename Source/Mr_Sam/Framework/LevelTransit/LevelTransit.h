@@ -14,5 +14,5 @@ class MR_SAM_API ULevelTransit : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 public:
 	UFUNCTION(BlueprintCallable, Category="Utils", meta=(WorldContext=WorldContextObject))
-	static bool LoadLevel(UObject *WorldContextObject, FName LevelName);
+	static bool LoadGameLevel(UObject *WorldContextObject, const FName LevelName);
 };

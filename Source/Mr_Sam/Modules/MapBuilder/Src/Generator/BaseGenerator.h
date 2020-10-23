@@ -33,6 +33,9 @@ protected:
     // ---
     virtual void GenerateRooms(UMapOutput *Output);
     virtual void GeneratePasses(UMapOutput *Output);
+
+    virtual void MergeWalls(UMapOutput *Output);
+    
     virtual void SetRoomFlags(UMapOutput *Output);
     virtual void PlaceStructures(UMapOutput *Output);
 

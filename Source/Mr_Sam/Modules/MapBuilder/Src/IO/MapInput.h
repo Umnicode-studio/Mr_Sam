@@ -28,6 +28,9 @@ public:
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Chapter")
     int LevelNumber = 0;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
+    bool MergeWalls = true;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     FIntPoint Size;

@@ -36,11 +36,6 @@ class MR_SAM_API UGeneratorUtils : public UBlueprintFunctionLibrary
 public:
     // API:
     UFUNCTION(BlueprintCallable, Category="MapBuilder|Functions")
-    static bool IsBound(FIntPoint Point, FIntPoint AreaPosition,
-                        FIntPoint AreaSize);
-
-    // ---
-    UFUNCTION(BlueprintCallable, Category="MapBuilder|Functions")
     static TArray<FRoomNeighbor> GetRoomNeighbors(UMapRoom *Room, UMapOutput *Output);
 
     
@@ -49,12 +44,10 @@ public:
 
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|Functions")
-    static bool IsStepsHere(const FString StepsId, FIntPoint Position, UMapLayer *Layer,
-        UMapOutput *Output);
+    static bool IsStepsHere(const FString StepsId, const FIntPoint &Position, UMapOutput *Output);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|Functions")
-    static bool IsWallHere(const FString WallId, FIntPoint Position, UMapLayer *Layer,
-        UMapOutput *Output);
+    static bool IsWallHere(const FString WallId, const FIntPoint &Position, UMapOutput *Output);
 
     // ---
     //static void ProceedFlagNode(MapRoom *Room, MapOutput &Output, FlagNode *Node = nullptr);

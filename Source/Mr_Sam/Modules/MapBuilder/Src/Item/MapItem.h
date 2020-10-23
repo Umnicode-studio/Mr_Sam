@@ -40,7 +40,7 @@ public:
     TEnumAsByte<EItemLocation> Location;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    FIntPoint Size;
+    FIntPoint Size = {1, 1};
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     TArray<TSubclassOf<UMapLayer>> Layers;

@@ -19,6 +19,10 @@ class MR_SAM_API UUtilsFunctions : public UBlueprintFunctionLibrary
 public:
     
     // API:
+    UFUNCTION(BlueprintCallable, Category="MapBuilder|Functions")
+    static bool IsBound(const FIntPoint &Point, const FIntPoint &AreaPosition,
+                        const FIntPoint &AreaSize);
+    // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|Utils")
     static bool IsItemMapTile(AActor *ItemActor);
 };

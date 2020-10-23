@@ -7,14 +7,14 @@
 bool UMapRoomArray::FixBrokenLinks(const bool Remove)
 {
     if (Remove || this->Content.GetAllocatedSize() > this->LastCapacity){
-        this->GlobalPositionRefsBook.Empty();
-        this->CoordinatesRefsBook.Empty();
+        this->GlobalPositionRefsBook.clear();
+        this->CoordinatesRefsBook.clear();
 
         for (int c = 0; c < this->Content.Num(); ++c){
             if (IsValid(this->Content[c]))
             {
-                this->GlobalPositionRefsBook.Add(&this->Content[c]->GlobalPosition, c);
-                this->CoordinatesRefsBook.Add(&this->Content[c]->Coordinates, c);
+                this->GlobalPositionRefsBook.emplace(&this->Content[c]->GlobalPosition, c);
+                this->CoordinatesRefsBook.emplace(&this->Content[c]->Coordinates, c);
             }
         }
 
@@ -30,8 +30,8 @@ void UMapRoomArray::LinkRoom(UMapRoom *Room)
 
     if (!this->FixBrokenLinks())
     {
-        this->GlobalPositionRefsBook.Add(&Room->GlobalPosition, this->Content.Num() - 1);
-        this->CoordinatesRefsBook.Add(&Room->Coordinates, this->Content.Num() - 1);
+        this->GlobalPositionRefsBook.emplace(&Room->GlobalPosition, this->Content.Num() - 1);
+        this->CoordinatesRefsBook.emplace(&Room->Coordinates, this->Content.Num() - 1);
     }
 }
 
@@ -41,11 +41,11 @@ UMapRoomArray::UMapRoomArray()
 }
 
 // API:
-bool UMapRoomArray::AddRoom(TSubclassOf<UMapRoom> RoomClass)
+bool UMapRoomArray::AddRoom(UObject *WorldContextObject, TSubclassOf<UMapRoom> RoomClass)
 {
-    if (!IsValid(RoomClass)) return false;
+    if (!IsValid(RoomClass) || !IsValid(WorldContextObject)) return false;
     
-    this->LinkRoom(RoomClass.GetDefaultObject());
+    this->LinkRoom(DuplicateObject(RoomClass.GetDefaultObject(), WorldContextObject));
     return true;
 }
 bool UMapRoomArray::AddExistRoom(UMapRoom *Room)
@@ -62,13 +62,15 @@ bool UMapRoomArray::AddExistRoom(UMapRoom *Room)
 // --
 bool UMapRoomArray::RemoveRoomByGlobalPosition(int GlobalPosition)
 {
-    int *Index = this->GlobalPositionRefsBook.Find(&GlobalPosition);
-    if (Index)
+    const auto Iterator = this->GlobalPositionRefsBook.find(&GlobalPosition);
+    if (Iterator != this->GlobalPositionRefsBook.end())
     {
-        this->CoordinatesRefsBook.Remove(&this->Content[*Index]->Coordinates);
-        this->Content.RemoveAt(*Index);
+        this->CoordinatesRefsBook.erase(this->CoordinatesRefsBook.find(
+                                           &this->Content[Iterator->second]->Coordinates));
+        
+        this->Content.RemoveAt(Iterator->second);
             
-        this->GlobalPositionRefsBook.Remove(&GlobalPosition);
+        this->GlobalPositionRefsBook.erase(Iterator);
             
         this->FixBrokenLinks(true);
         return true;
@@ -78,18 +80,27 @@ bool UMapRoomArray::RemoveRoomByGlobalPosition(int GlobalPosition)
 }
 bool UMapRoomArray::RemoveRoomByCoordinates(FRoomCoordinates Coordinates)
 {
-    int *Index = this->CoordinatesRefsBook.Find(&Coordinates);
+    const auto Iterator = this->CoordinatesRefsBook.find(&Coordinates);
 
-    if (Index){
-        this->GlobalPositionRefsBook.Remove(&this->Content[*Index]->GlobalPosition);
-        this->Content.RemoveAt(*Index);
-
-        this->CoordinatesRefsBook.Remove(&Coordinates);
+    if (Iterator != this->CoordinatesRefsBook.end()){
+        this->GlobalPositionRefsBook.erase(this->GlobalPositionRefsBook.find(
+                                                      &this->Content[Iterator->second]->GlobalPosition));
+        
+        this->Content.RemoveAt(Iterator->second);
+        this->CoordinatesRefsBook.erase(Iterator);
 
         this->FixBrokenLinks(true);
         return true;
     }
 
+    return false;
+}
+bool UMapRoomArray::RemoveItemByIndex(int Index)
+{
+    if (Index > 0 && Index < this->Content.Num())
+    {
+        this->Content.RemoveAt(Index);
+    }
     return false;
 }
 
@@ -114,20 +125,20 @@ UMapRoom *UMapRoomArray::GetRoomByIndex(int Index)
 }
 UMapRoom *UMapRoomArray::GetRoomByGlobalPosition(int GlobalPosition)
 {
-    int *Index = this->GlobalPositionRefsBook.Find(&GlobalPosition);
+    const auto Iterator = this->GlobalPositionRefsBook.find(&GlobalPosition);
 
-    if (Index){
-        return this->Content[*Index];
+    if (Iterator != this->GlobalPositionRefsBook.end()){
+        return this->Content[Iterator->second];
     }
 
     return nullptr;
 }
 UMapRoom *UMapRoomArray::GetRoomByCoordinates(FRoomCoordinates Coordinates)
 {
-    int *Index = this->CoordinatesRefsBook.Find(&Coordinates);
+    const auto Iterator = this->CoordinatesRefsBook.find(&Coordinates);
 
-    if (Index){
-        return this->Content[*Index];
+    if (Iterator != this->CoordinatesRefsBook.end()){
+        return this->Content[Iterator->second];
     }
 
     return nullptr;

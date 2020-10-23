@@ -3,15 +3,15 @@
 //
 
 #include "MapItemOutputArray.h"
-#include "../Generator/Functions.h"
+#include "../Utils/UtilsFunctions.h"
 
 bool UMapItemOutputArray::FixBrokenLinks(bool Remove)
 {
     if (Remove || this->Content.GetAllocatedSize() > this->LastCapacity){
-        this->PositionRefsBook.Empty();
+        this->PositionRefsBook.clear();
 
         for (int c = 0; c < this->Content.Num(); ++c){
-            this->PositionRefsBook.Add(&this->Content[c]->Position, c);
+            this->PositionRefsBook.emplace(&this->Content[c]->Position, c);
         }
 
         this->LastCapacity = this->Content.GetAllocatedSize();
@@ -26,7 +26,7 @@ void UMapItemOutputArray::LinkItem(UMapItemOutput *Item)
 
     if (!this->FixBrokenLinks())
     {
-        this->PositionRefsBook.Add(&Item->Position);
+        this->PositionRefsBook.emplace(&Item->Position, this->Content.Num() - 1);
     }
 }
 
@@ -36,11 +36,11 @@ UMapItemOutputArray::UMapItemOutputArray()
 }
 
 // API:
-bool UMapItemOutputArray::AddItem(TSubclassOf<UMapItemOutput> ItemClass)
+bool UMapItemOutputArray::AddItem(UObject *WorldContextObject, TSubclassOf<UMapItemOutput> ItemClass)
 {
-    if (!IsValid(ItemClass)) return false;
+    if (!IsValid(ItemClass) || !IsValid(WorldContextObject)) return false;
     
-    this->LinkItem(ItemClass.GetDefaultObject());
+    this->LinkItem(DuplicateObject(ItemClass.GetDefaultObject(), WorldContextObject));
     return true;
 }
 bool UMapItemOutputArray::AddExistItem(UMapItemOutput* Item)
@@ -55,24 +55,48 @@ bool UMapItemOutputArray::AddExistItem(UMapItemOutput* Item)
 }
 
 // ---
-bool UMapItemOutputArray::RemoveItem(FIntPoint Position, UMapLayer* Layer)
+bool UMapItemOutputArray::RemoveItemByPosition(FIntPoint &Position, UMapLayer* Layer)
 {
-    TArray<int> ItemsIndexes;
-    this->PositionRefsBook.MultiFind(&Position, ItemsIndexes);
+    const FIteratorRange IteratorsRange = this->PositionRefsBook.equal_range(&Position);
 
     // Try to find item with target layer
-    for (int Index : ItemsIndexes)
+    for (auto Iterator = IteratorsRange.first; Iterator != IteratorsRange.second; ++Iterator)
     {
-        if (Index > 0 && Index < this->Content.Num())
+        if (this->Content[Iterator->second]->Layers.Find(Layer) != INDEX_NONE)
         {
-            if (this->Content[Index]->Layers.Find(Layer) != INDEX_NONE)
-            {
-                this->Content.RemoveAt(Index);
-                return true;
-            }
+            this->Content.RemoveAt(Iterator->second);
+            return true;
         }
     }
 
+    return false;
+}
+bool UMapItemOutputArray::RemoveItemsById(FIntPoint& Position, const FString Id)
+{
+    bool IsRemoved = false;
+    const FIteratorRange IteratorsRange = this->PositionRefsBook.equal_range(&Position);
+
+    // Try to find item with target layer
+    for (auto Iterator = IteratorsRange.first; Iterator != IteratorsRange.second; ++Iterator)
+    {
+        if (this->Content[Iterator->second]->Id == Id)
+        {
+            this->Content.RemoveAt(Iterator->second);
+            IsRemoved = true;
+        }
+    }
+
+    this->FixBrokenLinks(true);
+    return IsRemoved;
+}
+bool UMapItemOutputArray::RemoveItemByIndex(int Index)
+{
+    if (Index > 0 && Index < this->Content.Num())
+    {
+        this->Content.RemoveAt(Index);
+    }
+
+    this->FixBrokenLinks(true);
     return false;
 }
 
@@ -93,28 +117,34 @@ UMapItemOutput *UMapItemOutputArray::GetItemByIndex(int Index)
         return this->Content[Index];
     }
 
+    this->FixBrokenLinks(true);
     return nullptr;
 }
-TArray<UMapItemOutput*> UMapItemOutputArray::GetItemsByPosition(FIntPoint Position)
+TArray<UMapItemOutput*> UMapItemOutputArray::GetItemsByPosition(FIntPoint &Position)
 {
-    TArray<int> ItemsIndexes;
     TArray<UMapItemOutput *> Items;
+    const FIteratorRange IteratorsRange = this->PositionRefsBook.equal_range(&Position);
+   
+    for (auto Iterator = IteratorsRange.first; Iterator != IteratorsRange.second; ++Iterator) {
+        Items.Add(this->Content[Iterator->second]);
+    }
     
-    this->PositionRefsBook.MultiFind(&Position, ItemsIndexes);
+    return Items;
+}
+TArray<UMapItemOutput*> UMapItemOutputArray::GetItemsByPositionAndId(FIntPoint& Position, const FString& Id)
+{
+    TArray<UMapItemOutput *> Items = this->GetItemsByPosition(Position);
 
-    for (int Index : ItemsIndexes)
+    for (int c = 0; c < Items.Num(); ++c)
     {
-        if (Index > 0 && Index < this->Content.Num())
-        {
-            Items.Add(this->Content[Index]);
-        }
+        if (Items[c]->Id != Id) Items.RemoveAt(c);  
     }
     
     return Items;
 }
 
 // ---
-UMapItemOutput *UMapItemOutputArray::FindItem(FIntPoint Position, UMapLayer* Layer)
+UMapItemOutput *UMapItemOutputArray::FindItem(FIntPoint &Position, UMapLayer* Layer)
 {
     TArray<UMapItemOutput *> Items = this->GetItemsByPosition(Position);
 
@@ -128,15 +158,14 @@ UMapItemOutput *UMapItemOutputArray::FindItem(FIntPoint Position, UMapLayer* Lay
     
     return nullptr;
 }
-UMapItemOutput* UMapItemOutputArray::FindItemThatPossesPoint(FIntPoint Point, UMapLayer* Layer)
+UMapItemOutput* UMapItemOutputArray::FindItemThatPossesPointByLayer(FIntPoint Point, UMapLayer* Layer)
 {
     // Try to optimize find process
     UMapItemOutput *Item = this->FindItem(Point, Layer);
 
     if (!IsValid(Item)){
         for (UMapItemOutput *SItem : this->Content){ // Check is bound
-            if (UGeneratorUtils::IsBound(Point, SItem->Position,
-                SItem->Position + SItem->Size))
+            if (UUtilsFunctions::IsBound(Point, SItem->Position, SItem->Size) && SItem->Layers.Contains(Layer))
             {
                 return SItem;
             }
@@ -146,6 +175,19 @@ UMapItemOutput* UMapItemOutputArray::FindItemThatPossesPoint(FIntPoint Point, UM
     }
 
     return Item;
+}
+TArray<UMapItemOutput*> UMapItemOutputArray::FindItemsThatPossesPointById(FIntPoint Point, const FString& Id)
+{
+    TArray<UMapItemOutput *> Items;
+
+    for (UMapItemOutput *SItem : this->Content){ // Check is bound
+        if (UUtilsFunctions::IsBound(Point, SItem->Position, SItem->Size) && SItem->Id == Id)
+        {   
+            Items.Add(SItem);
+        }
+    }
+    
+    return Items;
 }
 
 // ---

@@ -23,6 +23,9 @@ protected:
     // ---
     virtual void GenerateRooms(UMapOutput *Output) override;
     virtual void GeneratePasses(UMapOutput *Output) override;
+
+    virtual void MergeWalls(UMapOutput* Output) override;
+    
     virtual void SetRoomFlags(UMapOutput *Output) override;
     virtual void PlaceStructures(UMapOutput *Output) override;
 };

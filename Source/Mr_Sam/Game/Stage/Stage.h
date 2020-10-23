@@ -16,6 +16,9 @@ class MR_SAM_API AStage : public AActor
 
 	UPROPERTY()
 	USceneComponent *StageRootComponent = nullptr;
+
+	FVector GetActorScaleToTile(const FVector &ActorSize, const FIntPoint &ItemSize) const;
+	static float GetZValueForActor(const TArray<UMapLayer *> &Layers);
 public:	
 	AStage();
 
@@ -27,6 +30,9 @@ public:
 	UPROPERTY(VisibleAnywhere, Category="Properties")
 	UMapOutput *LevelSource = nullptr;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
+	FVector TileSize;
+	
 	UPROPERTY(VisibleAnywhere, Category="Properties")
 	bool IsLevelLoaded = false;
 
