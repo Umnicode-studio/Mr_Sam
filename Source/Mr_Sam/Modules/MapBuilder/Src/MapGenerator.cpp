@@ -1,5 +1,7 @@
 #include "MapGenerator.h"
 
+#include "Generator/Functions.h"
+
 UDefaultMapGenerator::UDefaultMapGenerator()
 {
     
@@ -114,9 +116,12 @@ void UDefaultMapGenerator::GenerateRooms(UMapOutput *Output)
     int GlobalIndex = 0;
     int FloorNumber = 0;
 
-    int y = 1;
-    while(y < Output->Input->Size.Y){ // generate floor
-        // create Rooms
+    int y = Output->Input->BorderSize;
+
+    // generate floor
+    do
+    {
+        // create rooms
         int x = Output->Input->BorderSize;
         TArray <TPair <int, int>> Rooms;
 
@@ -124,7 +129,7 @@ void UDefaultMapGenerator::GenerateRooms(UMapOutput *Output)
         while (FreeCells >= Output->Input->MinRoomWidth){ // place Rooms
             int RoomSize;
             
-            if (FreeCells > Output->Input->MinRoomWidth){ // prevent using int distribution with zero range
+            if (FreeCells > Output->Input->MinRoomWidth){ // Prevent using int distribution with zero range
                 // select random size
                 int MaxLength = Output->Input->Size.X - 1 - x;
                 if (Output->Input->MaxRoomWidth >= Output->Input->MinRoomWidth) MaxLength = Output->Input->MaxRoomWidth; // set max Room width
@@ -180,7 +185,7 @@ void UDefaultMapGenerator::GenerateRooms(UMapOutput *Output)
 
         y += Output->Input->RoomHeight + 1;
         FloorNumber++;
-    }
+    }while(y < Output->Input->Size.Y - Output->Input->BorderSize); 
 
     Output->FloorsCount = FloorNumber;
 
@@ -202,7 +207,6 @@ void UDefaultMapGenerator::GenerateRooms(UMapOutput *Output)
             }
 
             if (!Found){
-                
                 Output->GeneratorData.WallItem->Place(this,
                                                       {Fx, Fy}, Output);
             }
