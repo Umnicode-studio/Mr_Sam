@@ -54,6 +54,7 @@ bool UDefaultMapGenerator::Init(UMapOutput *Output)
             if (IsValid(Output->Input->WallItem))
             {
                 Output->GeneratorData.WallItem = Output->Input->WallItem.GetDefaultObject();
+                Output->GeneratorData.WallItem->Size = {1, 1}; // Size of wall is 1x1 tile
             }
             else
             {
@@ -64,6 +65,7 @@ bool UDefaultMapGenerator::Init(UMapOutput *Output)
             if (IsValid(Output->Input->WallWithHoleItem))
             {
                 Output->GeneratorData.WallWithHoleItem = Output->Input->WallWithHoleItem.GetDefaultObject();
+                Output->GeneratorData.WallItem->Size = {1, 1};
             }
             else
             {
@@ -145,7 +147,7 @@ void UDefaultMapGenerator::GenerateRooms(UMapOutput *Output)
             }
 
             Rooms.Add(TPair<int, int> (RoomSize, Output->Input->RoomHeight));
-            x += RoomSize + 1; // Make border between Rooms
+            x += RoomSize + Output->GeneratorData.WallItem->Size.X; // Make border between Rooms
 
             // Update free cells
             FreeCells = Output->Input->Size.X - Output->Input->BorderSize - x;
@@ -177,15 +179,16 @@ void UDefaultMapGenerator::GenerateRooms(UMapOutput *Output)
             
             RoomArea.Add(TPair<FIntPoint, FIntPoint> (RoomBounds.Key, RoomBounds.Value));
 
-            RoomX += Length + 1;
+            RoomX += Length + Output->Input->SpaceBetweenRooms.X;
 
             PositionOnFloor++;
             GlobalIndex++;
         }
 
-        y += Output->Input->RoomHeight + 1;
+        y += Output->Input->RoomHeight + Output->Input->SpaceBetweenRooms.Y;
         FloorNumber++;
-    }while(y < Output->Input->Size.Y - Output->Input->BorderSize); 
+    }
+    while(y < Output->Input->Size.Y - Output->Input->BorderSize - Output->Input->SpaceBetweenRooms.Y); 
 
     Output->FloorsCount = FloorNumber;
 
@@ -217,7 +220,7 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
 {
     struct FPass{
         ESideEnum Side;
-        TArray <TTuple <FIntPoint, UMapRoom *, bool>> Positions;
+        TArray <TTuple <FIntPoint, UMapRoom *, EOverlappedPassType>> Positions;
 
         FPass(const ESideEnum &Side){
             this->Side = Side;
@@ -236,20 +239,28 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
         return UGeneratorUtils::IsStepsHere(Output.GeneratorData.StepsItem->Id, Position, &Output) ||       
                UGeneratorUtils::IsWallHere(Output.GeneratorData.WallItem->Id, Position, &Output);
     };
-    auto CheckRoomX = [&](int x, int IsOnOtherSteps, UMapRoom *CurrentRoom, UMapRoom *TargetRoom,
-            UMapOutput &MOutput){
+    auto CheckRoomX = [&](int x, EOverlappedPassType OverlapType, UMapRoom *CurrentRoom,
+        UMapRoom *TargetRoom, UMapOutput &MOutput){
+        
         bool Result;
 
-        if (IsOnOtherSteps == 1) { // On current
+        if (OverlapType == T_Current) { // On current
             Result = UGeneratorUtils::IsStepsHere(MOutput.GeneratorData.StepsItem->Id,
                                                   {x, CurrentRoom->Finish.Y}, Output) &&
                      !IsObstacle({x, TargetRoom->Finish.Y}, MOutput);
             
         }
-        else if (IsOnOtherSteps == 2) { // On target
+        else if (OverlapType == T_Target) { // On target
+            Result = !IsObstacle({x, CurrentRoom->Finish.Y}, MOutput) &&
+                      UGeneratorUtils::IsStepsHere(MOutput.GeneratorData.StepsItem->Id,
+                                                  {x, TargetRoom->Finish.Y}, Output) ;
+        }
+        else if (OverlapType == T_Both)
+        {
             Result = UGeneratorUtils::IsStepsHere(MOutput.GeneratorData.StepsItem->Id,
-                                                  {x, TargetRoom->Finish.Y}, Output) &&
-                     !IsObstacle({x, CurrentRoom->Finish.Y}, MOutput);
+                                                  {x, CurrentRoom->Finish.Y}, Output) &&
+                     UGeneratorUtils::IsStepsHere(MOutput.GeneratorData.StepsItem->Id,
+                                                  {x, TargetRoom->Finish.Y}, Output);
         }
         else{
             Result = !IsObstacle({x, CurrentRoom->Finish.Y}, MOutput) &&
@@ -258,6 +269,8 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
 
         return Result;
     };
+
+    const float HalfRoomHeight = Output->Input->RoomHeight / 2;
 
     TArray <UMapRoom *> History;
     TArray <UMapRoom *> Used;
@@ -272,63 +285,108 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
         
         // Get all available positions for the pass
         auto Neighbors = UGeneratorUtils::GetRoomNeighbors(Current, Output);
+        
         for (FRoomNeighbor &Neighbor : Neighbors){
             TEnumAsByte<ESideEnum> &Side = Neighbor.Side;
             UMapRoom *NRoom = Neighbor.Room;
             
             if (IsUsed(NRoom, Used)) continue;
 
+            TArray<FPass> NormalSteps_Passes = {{S_Up}, {S_Down}};
+            TArray<FPass> OverlappedSteps_Passes = {{S_Up}, {S_Down}};
+            
             if (Side == S_Up || Side == S_Down) { // x axis check
                 for (int x = FMath::Max(NRoom->Start.X, Current->Start.X);
                      x <= FMath::Min(NRoom->Finish.X, Current->Finish.X); x++) {
 
                     // check current x
                     bool Add = true;
-                    int IsOnOtherSteps = 0; // O - not; 1 - steps in current room; 2 - steps in target room
+                    EOverlappedPassType OverlappingType = T_None;
 
                     if (UGeneratorUtils::IsStepsHere(Output->GeneratorData.StepsItem->Id,
                                                     {x, Current->Finish.Y}, Output)){
-                        IsOnOtherSteps = 1;
+                        OverlappingType = T_Current;
                     }
                     else if (UGeneratorUtils::IsStepsHere(Output->GeneratorData.StepsItem->Id,
-                                                          {x, NRoom->Finish.Y}, Output)){
-                        IsOnOtherSteps = 2;
+                                                          {x, NRoom->Finish.Y}, Output))
+                    {
+                        if (OverlappingType != T_None)
+                        {
+                            OverlappingType = T_Both;
+                        }else
+                        {
+                            OverlappingType = T_Target;
+                        }
                     }
 
                     // Check steps whole all their width
                     for (int Cx = x; Cx < x + Output->Input->StepWidth; Cx++) {
-                        if (!CheckRoomX(Cx, IsOnOtherSteps, Current, NRoom, *Output)) {
+                        if (!CheckRoomX(Cx, OverlappingType, Current, NRoom, *Output)) {
                             Add = false;
                             break;
                         }
                     }
 
                     // Add position to list ( If possible )
-                    if (Add) { 
-                        if (Side == S_Up) {
-                            Passes[0].Positions.Add(MakeTuple(FIntPoint (x,NRoom->Start.Y +
-                                                              FMath::FloorToInt(Output->Input->RoomHeight / 2)),
-                                                              NRoom, IsOnOtherSteps > 0));
+                    if (Add) {
+                        int RoomY;
+                        if (Side == S_Up)
+                        {
+                            // Swap overlap room to opposite
+                            if (OverlappingType == T_Target)
+                            {
+                                OverlappingType = T_Current;
+                            }else if (OverlappingType == T_Current)
+                            {
+                                OverlappingType = T_Target;
+                            }
+                            
+                            RoomY = NRoom->Start.Y;
+                        }else
+                        {
+                            RoomY = Current->Start.Y;
+                        }
+                        
+                        auto Tuple = MakeTuple(FIntPoint (x,RoomY +
+                                                          FMath::FloorToInt(HalfRoomHeight)),
+                                                          NRoom, OverlappingType);
+                        
+                        if (OverlappingType == T_None) {
+                            // Small hack, it's possible because values in enum are equal to array index
+                            NormalSteps_Passes[Side].Positions.Add(Tuple);
                         }
                         else {
-                            Passes[1].Positions.Add(MakeTuple(FIntPoint (x, Current->Start.Y +
-                                                              FMath::FloorToInt(Output->Input->RoomHeight / 2)),
-                                                              NRoom, IsOnOtherSteps > 0));
+                            OverlappedSteps_Passes[Side].Positions.Add(Tuple);
                         }
+                        
                     }
                 }
-            } else { // no checks for left/right
+            }
+            else { // no checks for left/right
                 if (Side == S_Left) {
                     Passes[2].Positions.Add(MakeTuple(FIntPoint(NRoom->Finish.X + 1,
-                                                           NRoom->Start.Y), NRoom, false));
+                                                           NRoom->Start.Y), NRoom, T_None));
                 }
                 else{
                     Passes[3].Positions.Add(MakeTuple(FIntPoint(Current->Finish.X + 1,
-                                                           Current->Start.Y), NRoom, false));
+                                                           Current->Start.Y), NRoom, T_None));
                 }
             }
-        }
 
+            // Remove all not overlapped steps ( Used to move priority to long steps )
+            for (int c = 0; c < OverlappedSteps_Passes.Num(); c++)
+            {   
+                if (OverlappedSteps_Passes[c].Positions.Num() != 0)
+                {
+                    Passes[c].Positions.Append(OverlappedSteps_Passes[c].Positions);
+                }
+                else
+                {
+                    Passes[c].Positions.Append(NormalSteps_Passes[c].Positions);
+                }
+            }  
+        }
+        
         // check for deadend
         bool IsDeadend = true;
         for (auto &Array : Passes){
@@ -348,73 +406,66 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
 
                 if (Source.Positions.Num() == 0) continue;
 
-                const auto &Tuple = Source.Positions[FMath::RandRange(0, Source.Positions.Num() - 1)];
-                FIntPoint Position = Tuple.Get<0>();
+                const auto &Tuple = Source.Positions[FMath::RandRange(0,
+                    Source.Positions.Num() - 1)];
+
+                // Divide tuple
+                FIntPoint ItemPosition = Tuple.Get<0>();
                 UMapRoom *Room = Tuple.Get<1>();
-                const bool IsOnOtherSteps = Tuple.Get<2>();
+                const EOverlappedPassType &OverlappingType = Tuple.Get<2>();
                 
                 if (Source.Side == S_Left || Source.Side == S_Right) {
-                    for (int y = Position.Y; y < Position.Y + Output->Input->RoomHeight; y++){ // remove walls
-                        FIntPoint ItemPosition(Position.X, y);
+                    for (int y = ItemPosition.Y; y < ItemPosition.Y + Output->Input->RoomHeight; y++){ // remove walls
+                        FIntPoint WallPosition(ItemPosition.X, y);
                         
-                        Output->Items->RemoveItemsById(ItemPosition, Output->GeneratorData.WallItem->Id);
+                        Output->Items->RemoveItemsById(WallPosition, Output->GeneratorData.WallItem->Id);
                     }
 
                     // Place door
                     Output->GeneratorData.DoorItem->Size = {1, Output->Input->RoomHeight};
-                    Output->GeneratorData.DoorItem->Place(this, Position, Output);
+                    Output->GeneratorData.DoorItem->Place(this, ItemPosition, Output);
                 }
                 else {
-                    GEngine->AddOnScreenDebugMessage(-1, 35.0f, FColor::Yellow, "Down");
+                    FIntPoint ItemSize = {Output->Input->StepWidth,
+                                          FMath::CeilToInt(HalfRoomHeight * 3) + 1};
                     
-                    Output->GeneratorData.StepsItem->Size = {Output->Input->StepWidth,
-                                                             FMath::CeilToInt(Output->Input->RoomHeight * 1.5) + 1};
-                    const int WallLine = Position.Y + FMath::CeilToInt(Output->Input->RoomHeight / 2);
+                    const int WallLine = ItemPosition.Y + FMath::CeilToInt(HalfRoomHeight);
 
-                    // fix overlapped steps
-                    if (IsOnOtherSteps){
-                        UMapItemOutput *OverlappedSteps = Output->Items->FindItemThatPossesPointByLayer(Position,
-                                                                               Output->GeneratorData.DefaultLayer);
-                        if (OverlappedSteps){
-                            if (OverlappedSteps->Position.Y < Position.Y){ // Up
-                                Output->GeneratorData.StepsItem->Size = {Output->Input->StepWidth,
-                                                                         Output->Input->RoomHeight + 1};
-                                
-                                Position.Y += FMath::CeilToInt(Output->Input->RoomHeight / 2);
-                            }else{ // Down
-                                OverlappedSteps->Size = {Output->Input->StepWidth,
-                                                         Output->Input->RoomHeight + 1};
-                                OverlappedSteps->Position.Y += FMath::CeilToInt(Output->Input->RoomHeight / 2);
-                            }
+                    // Fix overlapping
+                    if (OverlappingType != T_None)
+                    {
+                        if (OverlappingType == T_Current)
+                        {
+                            ItemPosition.Y += FMath::CeilToInt(HalfRoomHeight);
+                        }else if (OverlappingType == T_Target){ 
+                            ItemSize.Y -= FMath::CeilToInt(HalfRoomHeight);
+                        }else { // T_Both
+                            ItemPosition.Y += FMath::CeilToInt(HalfRoomHeight);
+                            ItemSize.Y -= FMath::CeilToInt(HalfRoomHeight);
                         }
                     }
-  
-                    // Make hole in a wall
-                    for (int x = Position.X; x < Position.X + Output->Input->StepWidth; x++){
-                        FIntPoint ItemPosition = {x, WallLine};
 
-                        Output->Items->RemoveItemsById(ItemPosition, Output->GeneratorData.WallItem->Id);
-                        Output->GeneratorData.WallWithHoleItem->Place(this, ItemPosition, Output);
+                    // Make hole in a wall
+                    for (int x = ItemPosition.X; x < ItemPosition.X + Output->Input->StepWidth; x++){
+                        FIntPoint WallPosition = {x, WallLine};
+
+                        Output->Items->RemoveItemsById(WallPosition, Output->GeneratorData.WallItem->Id);
+                        Output->GeneratorData.WallWithHoleItem->Place(this, WallPosition,
+                                                                      Output);
                     }
 
                     // Place steps
-                    Output->GeneratorData.StepsItem->Place(this, Position, Output);
+                    Output->GeneratorData.StepsItem->Size = ItemSize;
+                    Output->GeneratorData.StepsItem->Place(this, ItemPosition, Output);
                 }
                 
                 // Write our room to history
                 History.Add(Room);
                 Used.Add(Room);
-
+                    
                 // link rooms between themselves
-                FIntPoint PassPosition = Position;
-
-                if (!IsOnOtherSteps && Source.Side != S_Up){ // set position to hole border
-                    PassPosition.Y += FMath::CeilToInt(Output->Input->RoomHeight / 2);
-                }
-
-                Current->Passes.Add(FRoomPass(Room->GlobalPosition, Source.Side, PassPosition));
-                Room->Passes.Add(FRoomPass(Current->GlobalPosition, Source.Side, PassPosition));
-
+                Current->Passes.Add(FRoomPass(Room->GlobalPosition, Source.Side, ItemPosition));
+                Room->Passes.Add(FRoomPass(Current->GlobalPosition, Source.Side, ItemPosition));
                 break;
             }
         }

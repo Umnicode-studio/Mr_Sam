@@ -10,6 +10,15 @@
 
 #include "MapGenerator.generated.h"
 
+UENUM()
+enum EOverlappedPassType
+{
+    T_None = 0     UMETA(DisplayName="None"),
+    T_Current = 1  UMETA(DisplayName="Current"),
+    T_Target = 2   UMETA(DisplayName="Target"),
+    T_Both = 3     UMETA(DisplayName="Both")
+};
+
 UCLASS(Blueprintable)
 class MR_SAM_API UDefaultMapGenerator : public UBaseGenerator {
     GENERATED_BODY()

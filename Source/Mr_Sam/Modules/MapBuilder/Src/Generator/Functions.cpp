@@ -70,11 +70,6 @@ bool UGeneratorUtils::IsWallHere(const FString WallId, const FIntPoint &Position
 {
     if (IsValid(Output) && IsValid(Output->Items))
     {
-        if (Position.Y == 5)
-        {
-            GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::FromInt(Output->Items->FindItemsThatPossesPointById(Position, WallId).Num()));
-        }
-        
         return Output->Items->FindItemsThatPossesPointById(Position, WallId).Num() != 0;
     }
 

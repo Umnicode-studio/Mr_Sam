@@ -64,7 +64,7 @@ bool AStage::LoadStage(UMapOutput* Output)
 				if (Item->IsMapTile()) // If map tile
 				{
 					const FVector MeshSize = UFrameworkUtils::GetStaticMeshSize(
-						                     static_cast <AStaticMeshActor* >
+						                     static_cast <AStaticMeshActor *>
 						                        (Item->Actor)->GetStaticMeshComponent()->GetStaticMesh());
 					
 					const FIntPoint ItemPos = Output->Input->Size - Item->Position;
@@ -84,9 +84,10 @@ bool AStage::LoadStage(UMapOutput* Output)
 					ItemTransform.SetScale3D(this->GetActorScaleToTile(MeshSize, Item->Size));
 					
 					// If item is map tile, we know that Item->Actor is StaticMeshActor
-					AStaticMeshActor *Actor = GetWorld()->SpawnActor<AStaticMeshActor>(
+					AMapTile *Actor = GetWorld()->SpawnActor<AMapTile>(
 						                                         Item->Actor->GetClass(), ItemTransform);
-						
+					Actor->UpdateItemSize(Item->Size);
+					
 					// Attach tile to stage
 					FAttachmentTransformRules Rules(EAttachmentRule::KeepWorld, true);
 					Actor->AttachToActor(this, Rules);

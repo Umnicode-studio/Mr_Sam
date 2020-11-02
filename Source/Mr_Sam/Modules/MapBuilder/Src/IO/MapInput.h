@@ -50,6 +50,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults|Room")
     int RoomHeight;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults|Room")
+    FIntPoint SpaceBetweenRooms = {1, 1};
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults")
     int StepWidth;
 

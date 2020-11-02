@@ -18,5 +18,5 @@ bool UUtilsFunctions::IsBound(const FIntPoint &Point, const FIntPoint &AreaPosit
 // ---
 bool UUtilsFunctions::IsItemMapTile(AActor *ItemActor) 
 {
-    return IsValid(dynamic_cast<AStaticMeshActor *> (ItemActor));
+    return IsValid(dynamic_cast<AMapTile *> (ItemActor));
 }
