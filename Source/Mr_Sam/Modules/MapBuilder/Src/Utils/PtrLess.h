@@ -1,6 +1,4 @@
-//
-// Created by anton on 8/26/2020.
-//
+// (c) DPACK.inc
 
 #pragma once
 
@@ -15,7 +13,7 @@ struct FPtrLessIntPointPtr
 };
 struct FPtrLessIntPtr
 {
-    bool operator()(int *Left, int *Right) const {
+    bool operator()(int32 *Left, int32 *Right) const {
         return *Left < *Right;
     }
 };

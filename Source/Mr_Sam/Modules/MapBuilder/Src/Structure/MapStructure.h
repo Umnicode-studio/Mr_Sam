@@ -1,6 +1,4 @@
-//
-// Created by anton on 5/31/20.
-//
+// (c) DPACK.inc
 
 #pragma once
 
@@ -20,7 +18,7 @@ public:
     FString Id = "None";
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    int GlobalPosition;
+    int32 GlobalPosition;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     TArray <FMapStructureChunk> Chunks;
@@ -32,13 +30,13 @@ public:
 
     // API:
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapStructure")
-    int GetStructureWidth() const;
+    int32 GetStructureWidth() const;
 
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapStructure",
               meta = (WorldContext = WorldContextObject))
     static UMapStructure *MAKE(UObject *WorldContextObject, const FString StructureId,
-                               const int StructureGlobalPosition,
+                               const int32 StructureGlobalPosition,
                                const TArray<FMapStructureChunk> StructureChunks,
                                const TArray<FString> StructureProtectedBy);
 };

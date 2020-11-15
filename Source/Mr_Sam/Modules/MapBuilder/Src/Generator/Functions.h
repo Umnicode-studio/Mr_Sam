@@ -1,6 +1,4 @@
-//
-// Created by anton on 6/25/2020.
-//
+// (c) DPACK.inc
 
 #pragma once
 
@@ -44,16 +42,16 @@ public:
 
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|Functions")
-    static bool IsStepsHere(const FString StepsId, const FIntPoint &Position, UMapOutput *Output);
+    static bool IsStepsHere(const FString StepsId, const FIntPoint Position, UMapOutput *Output);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|Functions")
-    static bool IsWallHere(const FString WallId, const FIntPoint &Position, UMapOutput *Output);
+    static bool IsWallHere(const FString WallId, const FIntPoint Position, UMapOutput *Output);
 
     // ---
     //static void ProceedFlagNode(MapRoom *Room, MapOutput &Output, FlagNode *Node = nullptr);
     //static void ProceedProtectNode(ProtectNodeParams Parameters);
 
     // ---
-    //static Utils::Sides GetSidesConfigForArea(MapRoom *Room, Range <Data_2 <int>> Area,
+    //static Utils::Sides GetSidesConfigForArea(MapRoom *Room, Range <Data_2 <int32>> Area,
                                               //MapOutput &Output);
 };

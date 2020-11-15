@@ -1,18 +1,21 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// (c) DPACK.inc
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+
+#include "../../SmartVariable/SmartInt.h"
+
 #include "GameObject.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class MR_SAM_API UGameObject : public UActorComponent
+class MR_SAM_API UGameObjectComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
-	UGameObject();
+	UGameObjectComponent();
 
 	// Properties:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
@@ -28,7 +31,7 @@ public:
 	int Damage = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Physics")
-    int Health = 100;
+    FSmartInt Health {100};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Physics")
     bool IsBurn = false;
@@ -37,8 +40,8 @@ public:
     bool IsExplode = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Properties|Interaction")
-    bool IsInteract = false;
-	
+    bool IsInInteract = false;
+
 protected:
 	
 	virtual void BeginPlay() override;

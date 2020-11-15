@@ -1,6 +1,4 @@
-//
-// Created by anton on 6/6/20.
-//
+// (c) DPACK.inc
 
 #pragma once
 
@@ -69,5 +67,8 @@ public:
                           const FIntPoint ItemSize, TArray<TSubclassOf<UMapLayer>> ItemLayers);
     
     // ---
+    #if WITH_EDITOR
     virtual void PostEditChangeProperty(FPropertyChangedEvent &PropertyChangedEvent) override;
+    #endif
+
 };

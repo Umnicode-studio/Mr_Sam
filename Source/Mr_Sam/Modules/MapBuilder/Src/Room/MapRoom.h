@@ -1,6 +1,4 @@
-//
-// Created by anton on 6/6/20.
-//
+// (c) DPACK.inc
 
 #pragma once
 
@@ -16,7 +14,7 @@ struct MR_SAM_API FRoomPass{
     GENERATED_BODY()
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    int RoomId;
+    int32 RoomId;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     TEnumAsByte<ESideEnum> Side = S_Up;
@@ -28,7 +26,7 @@ struct MR_SAM_API FRoomPass{
     {
         this->RoomId = 0;
     }
-    explicit FRoomPass(const int RoomId, TEnumAsByte<ESideEnum> PassSide, FIntPoint PassPosition)
+    explicit FRoomPass(const int32 RoomId, TEnumAsByte<ESideEnum> PassSide, FIntPoint PassPosition)
     {
         this->RoomId = RoomId;
         this->Side = PassSide;
@@ -50,17 +48,17 @@ struct FRoomCoordinates
     GENERATED_BODY()
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    int PositionOnFloor = 0;
+    int32 PositionOnFloor = 0;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    int Floor = 0;
+    int32 Floor = 0;
     
     FRoomCoordinates()
     {
        
     }
 
-    FRoomCoordinates(const int PositionOnFloor, const int Floor)
+    FRoomCoordinates(const int32 PositionOnFloor, const int32 Floor)
     {
         this->PositionOnFloor = PositionOnFloor;
         this->Floor = Floor;
@@ -87,7 +85,7 @@ public:
     TArray <TEnumAsByte<ERoomFlags>> Flags;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Bounds")
-    int Width = 0;
+    int32 Width = 0;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Bounds")
     FIntPoint Start;
@@ -96,7 +94,7 @@ public:
     FIntPoint Finish;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    int GlobalPosition = 0;
+    int32 GlobalPosition = 0;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     FRoomCoordinates Coordinates;
@@ -116,10 +114,12 @@ public:
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoom",
               meta = (WorldContext = WorldContextObject))
-    static UMapRoom *MAKE(UObject *WorldContextObject, const int RoomWidth,
+    static UMapRoom *MAKE(UObject *WorldContextObject, const int32 RoomWidth,
                           const FIntPoint RoomStart, const FIntPoint RoomFinish, 
-                          const int RoomGlobalPosition, const FRoomCoordinates RoomCoordinates);
+                          const int32 RoomGlobalPosition, const FRoomCoordinates RoomCoordinates);
     
     // ---
+    #if WITH_EDITOR
     virtual void PostEditChangeProperty(FPropertyChangedEvent &PropertyChangedEvent) override;
+    #endif
 };

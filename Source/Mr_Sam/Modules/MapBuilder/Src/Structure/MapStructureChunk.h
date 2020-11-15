@@ -1,6 +1,4 @@
-//
-// Created by anton on 6/6/20.
-//
+// (c) DPACK.inc
 
 #pragma once
 
@@ -21,10 +19,10 @@ struct MR_SAM_API FMapStructureChunk
     FString Id = "None";
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    int Order = I_Random;
+    int32 Order = I_Random;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    int Width = 0;
+    int32 Width = 0;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     TArray<FMapStructureChunkContent> Content;
@@ -34,7 +32,7 @@ struct MR_SAM_API FMapStructureChunk
         
     }
 
-    FMapStructureChunk(const FString Id, const int Order, const int Width,
+    FMapStructureChunk(const FString Id, const int32 Order, const int32 Width,
                        const TArray<FMapStructureChunkContent> Content)
     {
         this->Id = Id;

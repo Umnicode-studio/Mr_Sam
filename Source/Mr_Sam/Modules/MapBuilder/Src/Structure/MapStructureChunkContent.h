@@ -1,6 +1,4 @@
-//
-// Created by anton on 6/26/2020.
-//
+// (c) DPACK.inc
 
 #pragma once
 

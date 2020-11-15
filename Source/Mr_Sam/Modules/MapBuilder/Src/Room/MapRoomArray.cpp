@@ -10,7 +10,7 @@ bool UMapRoomArray::FixBrokenLinks(const bool Remove)
         this->GlobalPositionRefsBook.clear();
         this->CoordinatesRefsBook.clear();
 
-        for (int c = 0; c < this->Content.Num(); ++c){
+        for (int32 c = 0; c < this->Content.Num(); ++c){
             if (IsValid(this->Content[c]))
             {
                 this->GlobalPositionRefsBook.emplace(&this->Content[c]->GlobalPosition, c);
@@ -60,7 +60,7 @@ bool UMapRoomArray::AddExistRoom(UMapRoom *Room)
 }
 
 // --
-bool UMapRoomArray::RemoveRoomByGlobalPosition(int GlobalPosition)
+bool UMapRoomArray::RemoveRoomByGlobalPosition(int32 GlobalPosition)
 {
     const auto Iterator = this->GlobalPositionRefsBook.find(&GlobalPosition);
     if (Iterator != this->GlobalPositionRefsBook.end())
@@ -95,7 +95,7 @@ bool UMapRoomArray::RemoveRoomByCoordinates(FRoomCoordinates Coordinates)
 
     return false;
 }
-bool UMapRoomArray::RemoveItemByIndex(int Index)
+bool UMapRoomArray::RemoveItemByIndex(int32 Index)
 {
     if (Index > 0 && Index < this->Content.Num())
     {
@@ -105,7 +105,7 @@ bool UMapRoomArray::RemoveItemByIndex(int Index)
 }
 
 // ---
-int UMapRoomArray::Num() const
+int32 UMapRoomArray::Num() const
 {
     return this->Content.Num();
 }
@@ -115,7 +115,7 @@ bool UMapRoomArray::Empty() const
 }
 
 // ---
-UMapRoom *UMapRoomArray::GetRoomByIndex(int Index)
+UMapRoom *UMapRoomArray::GetRoomByIndex(int32 Index)
 {
     if (Index > -1 && Index < this->Num()){
         return this->Content[Index];
@@ -123,7 +123,7 @@ UMapRoom *UMapRoomArray::GetRoomByIndex(int Index)
 
     return nullptr; 
 }
-UMapRoom *UMapRoomArray::GetRoomByGlobalPosition(int GlobalPosition)
+UMapRoom *UMapRoomArray::GetRoomByGlobalPosition(int32 GlobalPosition)
 {
     const auto Iterator = this->GlobalPositionRefsBook.find(&GlobalPosition);
 
@@ -143,11 +143,11 @@ UMapRoom *UMapRoomArray::GetRoomByCoordinates(FRoomCoordinates Coordinates)
 
     return nullptr;
 }
-TArray<UMapRoom*> UMapRoomArray::GetRoomsOnFloor(int Floor)
+TArray<UMapRoom*> UMapRoomArray::GetRoomsOnFloor(int32 Floor)
 {
     TArray<UMapRoom *> Rooms;
 
-    for (int x = 0; ; x++){
+    for (int32 x = 0; ; x++){
         UMapRoom *Temp = this->GetRoomByCoordinates({x, Floor});
         if (!Temp) break; // If we get the last room on the floor
 

@@ -1,6 +1,4 @@
-//
-// Created by anton on 5/31/20.
-//
+// (c) DPACK.inc
 
 #pragma once
 
@@ -24,10 +22,10 @@ public:
     FString LevelDescription = "None";
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Chapter")
-    int ChapterNumber = 0;
+    int32 ChapterNumber = 0;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Chapter")
-    int LevelNumber = 0;
+    int32 LevelNumber = 0;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     bool MergeWalls = true;
@@ -42,22 +40,22 @@ public:
     FIntPoint FinishPoint;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults|Room")
-    int MinRoomWidth;
+    int32 MinRoomWidth;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults|Room")
-    int MaxRoomWidth;
+    int32 MaxRoomWidth;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults|Room")
-    int RoomHeight;
+    int32 RoomHeight;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults|Room")
     FIntPoint SpaceBetweenRooms = {1, 1};
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults")
-    int StepWidth;
+    int32 StepWidth;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults")
-    int BorderSize;
+    int32 BorderSize;
 
     // Default items
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties|Defaults")

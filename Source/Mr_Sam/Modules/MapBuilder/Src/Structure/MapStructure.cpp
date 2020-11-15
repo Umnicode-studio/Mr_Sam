@@ -6,9 +6,9 @@ UMapStructure::UMapStructure()
 }
 
 // API:
-int UMapStructure::GetStructureWidth() const
+int32 UMapStructure::GetStructureWidth() const
 {
-    int Width = 0;
+    int32 Width = 0;
 
     for (const FMapStructureChunk &Chunk : this->Chunks) Width += Chunk.Width;
     return Width;
@@ -16,7 +16,7 @@ int UMapStructure::GetStructureWidth() const
 
 // ---
 UMapStructure *UMapStructure::MAKE(UObject* WorldContextObject, const FString StructureId,
-                                   const int StructureGlobalPosition,
+                                   const int32 StructureGlobalPosition,
                                    const TArray<FMapStructureChunk> StructureChunks,
                                    const TArray<FString> StructureProtectedBy)
 {

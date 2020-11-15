@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// (c) DPACK.inc
 
 #pragma once
 
@@ -17,5 +17,5 @@ class MR_SAM_API AMapTile : public AStaticMeshActor
 public:
     // World size is changes in Stage::LoadLevel(), but this used for set item size for steps, etc..
     UFUNCTION( BlueprintImplementableEvent, Category = "MapBuilder|MapTile|Events")
-    void UpdateItemSize(const FIntPoint &Size);
+    void UpdateItemSize(const FIntPoint Size);
 };

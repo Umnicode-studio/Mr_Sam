@@ -10,7 +10,7 @@ bool UMapItemOutputArray::FixBrokenLinks(bool Remove)
     if (Remove || this->Content.GetAllocatedSize() > this->LastCapacity){
         this->PositionRefsBook.clear();
 
-        for (int c = 0; c < this->Content.Num(); ++c){
+        for (int32 c = 0; c < this->Content.Num(); ++c){
             this->PositionRefsBook.emplace(&this->Content[c]->Position, c);
         }
 
@@ -55,7 +55,7 @@ bool UMapItemOutputArray::AddExistItem(UMapItemOutput* Item)
 }
 
 // ---
-bool UMapItemOutputArray::RemoveItemByPosition(FIntPoint &Position, UMapLayer* Layer)
+bool UMapItemOutputArray::RemoveItemByPosition(FIntPoint Position, UMapLayer* Layer)
 {
     const FIteratorRange IteratorsRange = this->PositionRefsBook.equal_range(&Position);
 
@@ -71,7 +71,7 @@ bool UMapItemOutputArray::RemoveItemByPosition(FIntPoint &Position, UMapLayer* L
 
     return false;
 }
-bool UMapItemOutputArray::RemoveItemsById(FIntPoint& Position, const FString Id)
+bool UMapItemOutputArray::RemoveItemsById(FIntPoint Position, const FString Id)
 {
     bool IsRemoved = false;
     const FIteratorRange IteratorsRange = this->PositionRefsBook.equal_range(&Position);
@@ -89,7 +89,7 @@ bool UMapItemOutputArray::RemoveItemsById(FIntPoint& Position, const FString Id)
     this->FixBrokenLinks(true);
     return IsRemoved;
 }
-bool UMapItemOutputArray::RemoveItemByIndex(int Index)
+bool UMapItemOutputArray::RemoveItemByIndex(int32 Index)
 {
     if (Index > 0 && Index < this->Content.Num())
     {
@@ -105,13 +105,13 @@ bool UMapItemOutputArray::Empty() const
 {
     return this->Num() == 0;
 }
-int UMapItemOutputArray::Num() const
+int32 UMapItemOutputArray::Num() const
 {
     return this->Content.Num();
 }
 
 // ---
-UMapItemOutput *UMapItemOutputArray::GetItemByIndex(int Index)
+UMapItemOutput *UMapItemOutputArray::GetItemByIndex(int32 Index)
 {
     if (Index > -1 && Index < this->Num()){
         return this->Content[Index];
@@ -120,7 +120,7 @@ UMapItemOutput *UMapItemOutputArray::GetItemByIndex(int Index)
     this->FixBrokenLinks(true);
     return nullptr;
 }
-TArray<UMapItemOutput*> UMapItemOutputArray::GetItemsByPosition(FIntPoint &Position)
+TArray<UMapItemOutput*> UMapItemOutputArray::GetItemsByPosition(FIntPoint Position)
 {
     TArray<UMapItemOutput *> Items;
     const FIteratorRange IteratorsRange = this->PositionRefsBook.equal_range(&Position);
@@ -131,11 +131,11 @@ TArray<UMapItemOutput*> UMapItemOutputArray::GetItemsByPosition(FIntPoint &Posit
     
     return Items;
 }
-TArray<UMapItemOutput*> UMapItemOutputArray::GetItemsByPositionAndId(FIntPoint& Position, const FString& Id)
+TArray<UMapItemOutput*> UMapItemOutputArray::GetItemsByPositionAndId(const FIntPoint Position, const FString Id)
 {
     TArray<UMapItemOutput *> Items = this->GetItemsByPosition(Position);
 
-    for (int c = 0; c < Items.Num(); ++c)
+    for (int32 c = 0; c < Items.Num(); ++c)
     {
         if (Items[c]->Id != Id) Items.RemoveAt(c);  
     }
@@ -144,7 +144,7 @@ TArray<UMapItemOutput*> UMapItemOutputArray::GetItemsByPositionAndId(FIntPoint& 
 }
 
 // ---
-UMapItemOutput *UMapItemOutputArray::FindItem(FIntPoint &Position, UMapLayer* Layer)
+UMapItemOutput *UMapItemOutputArray::FindItem(FIntPoint Position, UMapLayer* Layer)
 {
     TArray<UMapItemOutput *> Items = this->GetItemsByPosition(Position);
 
@@ -176,7 +176,7 @@ UMapItemOutput* UMapItemOutputArray::FindItemThatPossesPointByLayer(FIntPoint Po
 
     return Item;
 }
-TArray<UMapItemOutput*> UMapItemOutputArray::FindItemsThatPossesPointById(FIntPoint Point, const FString& Id)
+TArray<UMapItemOutput*> UMapItemOutputArray::FindItemsThatPossesPointById(const FIntPoint Point, const FString Id)
 {
     TArray<UMapItemOutput *> Items;
 

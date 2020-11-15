@@ -1,6 +1,4 @@
-//
-// Created by anton on 6/9/20.
-//
+// (c) DPACK.inc
 
 #pragma once
 
@@ -34,7 +32,7 @@ public:
     UMapInput *Input = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
-    int FloorsCount = 0;
+    int32 FloorsCount = 0;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Properties")
     FGeneratorData GeneratorData; 

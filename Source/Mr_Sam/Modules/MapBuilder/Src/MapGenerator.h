@@ -1,12 +1,11 @@
-//
-// Created by anton on 6/9/20.
-//
+// (c) DPACK.inc
 
 #pragma once
 
 #include "CoreMinimal.h"
 
 #include "Generator/BaseGenerator.h"
+#include "../../../Framework/Utils/CppUtils.h"
 
 #include "MapGenerator.generated.h"
 

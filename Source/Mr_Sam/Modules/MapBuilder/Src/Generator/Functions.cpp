@@ -57,7 +57,7 @@ TArray<FRoomNeighbor> UGeneratorUtils::GetRoomNeighbors(UMapRoom *Room, UMapOutp
 }
 
 // ---
-bool UGeneratorUtils::IsStepsHere(const FString StepsId, const FIntPoint &Position, UMapOutput* Output)
+bool UGeneratorUtils::IsStepsHere(const FString StepsId, const FIntPoint Position, UMapOutput* Output)
 {
     if (IsValid(Output) && IsValid(Output->Items))
     {
@@ -66,7 +66,7 @@ bool UGeneratorUtils::IsStepsHere(const FString StepsId, const FIntPoint &Positi
 
     return false;
 }
-bool UGeneratorUtils::IsWallHere(const FString WallId, const FIntPoint &Position, UMapOutput* Output)
+bool UGeneratorUtils::IsWallHere(const FString WallId, const FIntPoint Position, UMapOutput* Output)
 {
     if (IsValid(Output) && IsValid(Output->Items))
     {

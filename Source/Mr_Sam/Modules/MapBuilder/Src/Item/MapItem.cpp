@@ -80,10 +80,13 @@ UMapItem* UMapItem::MAKE(UObject* WorldContextObject, TSubclassOf<AActor> ItemAc
 }
 
 // ---
+#if WITH_EDITOR
 void UMapItem::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
+    Super::PostEditChangeProperty(PropertyChangedEvent);
+    
     TArray<TSubclassOf<UMapLayer>> UniqueLayers;
-    for (int c = 0; c < this->Layers.Num(); c++)
+    for (int32 c = 0; c < this->Layers.Num(); c++)
     {
         if (UniqueLayers.Find(this->Layers[c]) == INDEX_NONE)
         {
@@ -105,3 +108,4 @@ void UMapItem::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEven
         this->IsMapTile = false;
     }
 }
+#endif

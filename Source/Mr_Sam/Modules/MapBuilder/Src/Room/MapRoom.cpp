@@ -16,9 +16,9 @@ bool UMapRoom::IsHaveFlag(const ERoomFlags Flag) const
 }
 
 // ---
-UMapRoom* UMapRoom::MAKE(UObject* WorldContextObject, const int RoomWidth,
+UMapRoom* UMapRoom::MAKE(UObject* WorldContextObject, const int32 RoomWidth,
                          const FIntPoint RoomStart, const FIntPoint RoomFinish,
-                         const int RoomGlobalPosition, const FRoomCoordinates RoomCoordinates)
+                         const int32 RoomGlobalPosition, const FRoomCoordinates RoomCoordinates)
 {
     if (IsValid(WorldContextObject))
     {
@@ -41,12 +41,13 @@ UMapRoom* UMapRoom::MAKE(UObject* WorldContextObject, const int RoomWidth,
 
 
 // ---
+#if WITH_EDITOR
 void UMapRoom::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
     Super::PostEditChangeProperty(PropertyChangedEvent);
 
     TArray<ERoomFlags> UniqueFlags;
-    for (int c = 0; c < this->Flags.Num(); c++)
+    for (int32 c = 0; c < this->Flags.Num(); c++)
     {
         if (UniqueFlags.Find(this->Flags[c]) == INDEX_NONE)
         {
@@ -59,3 +60,4 @@ void UMapRoom::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEven
         }
     }
 }
+#endif

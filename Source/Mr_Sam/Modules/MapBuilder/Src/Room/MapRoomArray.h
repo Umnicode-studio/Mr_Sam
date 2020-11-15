@@ -1,6 +1,4 @@
-//
-// Created by anton on 8/23/2020.
-//
+// (c) DPACK.inc
 
 #pragma once
 
@@ -15,8 +13,8 @@ UCLASS(BlueprintType)
 class MR_SAM_API UMapRoomArray : public UMapObject {
     GENERATED_BODY()
 
-    std::map <int *, int, FPtrLessIntPtr> GlobalPositionRefsBook;
-    std::map <FRoomCoordinates *, int, FPtrLessRoomCoordinatesPtr> CoordinatesRefsBook;
+    std::map <int32 *, int32, FPtrLessIntPtr> GlobalPositionRefsBook;
+    std::map <FRoomCoordinates *, int32, FPtrLessRoomCoordinatesPtr> CoordinatesRefsBook;
     
     void LinkRoom(UMapRoom *Room);
     bool FixBrokenLinks(const bool Remove = false); // Work around that can help update pointers in
@@ -26,7 +24,7 @@ public:
 
     // Variables:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Properties")
-    int LastCapacity = 0;
+    int32 LastCapacity = 0;
     
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Properties")
     TArray <UMapRoom *> Content;
@@ -40,33 +38,33 @@ public:
 
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
-    bool RemoveRoomByGlobalPosition(int GlobalPosition);
+    bool RemoveRoomByGlobalPosition(int32 GlobalPosition);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
     bool RemoveRoomByCoordinates(FRoomCoordinates Coordinates);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
-    bool RemoveItemByIndex(int Index);
+    bool RemoveItemByIndex(int32 Index);
 
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
-    int Num() const;
+    int32 Num() const;
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
     bool Empty() const;
 
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
-    UMapRoom *GetRoomByIndex(int Index);
+    UMapRoom *GetRoomByIndex(int32 Index);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
-    UMapRoom *GetRoomByGlobalPosition(int GlobalPosition);
+    UMapRoom *GetRoomByGlobalPosition(int32 GlobalPosition);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
     UMapRoom *GetRoomByCoordinates(FRoomCoordinates Coordinates);
 
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")
-    TArray <UMapRoom *> GetRoomsOnFloor(int Floor);  
+    TArray <UMapRoom *> GetRoomsOnFloor(int32 Floor);  
 
     // ---
     UFUNCTION(BlueprintCallable, Category="MapBuilder|MapRoomArray")

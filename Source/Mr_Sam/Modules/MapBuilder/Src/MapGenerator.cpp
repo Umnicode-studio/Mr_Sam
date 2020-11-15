@@ -9,6 +9,8 @@ UDefaultMapGenerator::UDefaultMapGenerator()
 
 bool UDefaultMapGenerator::Init(UMapOutput *Output)
 {
+    Super::Init(Output);
+    
     Output->GeneratorData = FGeneratorData();
     if (IsValid(Output->Items) && IsValid(Output->Rooms) && IsValid(Output->Input))
     {
@@ -103,37 +105,39 @@ bool UDefaultMapGenerator::Init(UMapOutput *Output)
 }
 void UDefaultMapGenerator::CleanUp(UMapOutput *Output)
 {
-    
+    Super::CleanUp(Output);
 }
 
 void UDefaultMapGenerator::GenerateRooms(UMapOutput *Output)
 {
-    auto GetRoomArea = [](const FIntPoint StartPos, const int Length, const int Height){
+    Super::CleanUp(Output);
+    
+    auto GetRoomArea = [](const FIntPoint StartPos, const int32 Length, const int32 Height){
         return TPair<FIntPoint, FIntPoint> (FIntPoint(StartPos.X, StartPos.Y),
                FIntPoint(StartPos.X + Length - 1, StartPos.Y + Height - 1));
     };
     
     TArray <TPair <FIntPoint, FIntPoint>> RoomArea;
 
-    int GlobalIndex = 0;
-    int FloorNumber = 0;
+    int32 GlobalIndex = 0;
+    int32 FloorNumber = 0;
 
-    int y = Output->Input->BorderSize;
+    int32 y = Output->Input->BorderSize;
 
     // generate floor
     do
     {
         // create rooms
-        int x = Output->Input->BorderSize;
-        TArray <TPair <int, int>> Rooms;
+        int32 x = Output->Input->BorderSize;
+        TArray <TPair <int32, int32>> Rooms;
 
-        int FreeCells = Output->Input->Size.X - Output->Input->BorderSize - x;
+        int32 FreeCells = Output->Input->Size.X - Output->Input->BorderSize - x;
         while (FreeCells >= Output->Input->MinRoomWidth){ // place Rooms
-            int RoomSize;
+            int32 RoomSize;
             
-            if (FreeCells > Output->Input->MinRoomWidth){ // Prevent using int distribution with zero range
+            if (FreeCells > Output->Input->MinRoomWidth){ // Prevent using int32 distribution with zero range
                 // select random size
-                int MaxLength = Output->Input->Size.X - 1 - x;
+                int32 MaxLength = Output->Input->Size.X - 1 - x;
                 if (Output->Input->MaxRoomWidth >= Output->Input->MinRoomWidth) MaxLength = Output->Input->MaxRoomWidth; // set max Room width
                 
                 RoomSize = FMath::RandRange(Output->Input->MinRoomWidth, MaxLength);
@@ -146,7 +150,7 @@ void UDefaultMapGenerator::GenerateRooms(UMapOutput *Output)
                 RoomSize = FreeCells;
             }
 
-            Rooms.Add(TPair<int, int> (RoomSize, Output->Input->RoomHeight));
+            Rooms.Add(TPair<int32, int32> (RoomSize, Output->Input->RoomHeight));
             x += RoomSize + Output->GeneratorData.WallItem->Size.X; // Make border between Rooms
 
             // Update free cells
@@ -154,22 +158,15 @@ void UDefaultMapGenerator::GenerateRooms(UMapOutput *Output)
         }
 
         // Custom shuffle
-        for (int i = 0; i < Rooms.Num(); i++)
-        {
-            const int Index = FMath::RandRange(0, Rooms.Num() - 1);
-            if (Index != i)
-            {
-                Rooms.Swap(i, Index);
-            }
-        }
+        FFrameworkCppUtils::ShuffleTArray(Rooms);
 
         // Place rooms
-        int RoomX = Output->Input->BorderSize;
-        int PositionOnFloor = 0;
+        int32 RoomX = Output->Input->BorderSize;
+        int32 PositionOnFloor = 0;
 
         for (auto &RoomData : Rooms){
-            const int Length = RoomData.Key;
-            const int Height = RoomData.Value;
+            const int32 Length = RoomData.Key;
+            const int32 Height = RoomData.Value;
             
             TPair<FIntPoint, FIntPoint> RoomBounds = GetRoomArea({RoomX, y}, Length, Height);
 
@@ -193,8 +190,8 @@ void UDefaultMapGenerator::GenerateRooms(UMapOutput *Output)
     Output->FloorsCount = FloorNumber;
 
     // Mark all walls
-    for (int Fx = 0; Fx < Output->Input->Size.X; Fx++){
-        for (int Fy = 0; Fy < Output->Input->Size.Y; Fy++){
+    for (int32 Fx = 0; Fx < Output->Input->Size.X; Fx++){
+        for (int32 Fy = 0; Fy < Output->Input->Size.Y; Fy++){
             bool Found = false;
 
             for (auto &Area : RoomArea){
@@ -218,6 +215,8 @@ void UDefaultMapGenerator::GenerateRooms(UMapOutput *Output)
 }
 void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
 {
+    Super::GeneratePasses(Output);
+    
     struct FPass{
         ESideEnum Side;
         TArray <TTuple <FIntPoint, UMapRoom *, EOverlappedPassType>> Positions;
@@ -239,7 +238,7 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
         return UGeneratorUtils::IsStepsHere(Output.GeneratorData.StepsItem->Id, Position, &Output) ||       
                UGeneratorUtils::IsWallHere(Output.GeneratorData.WallItem->Id, Position, &Output);
     };
-    auto CheckRoomX = [&](int x, EOverlappedPassType OverlapType, UMapRoom *CurrentRoom,
+    auto CheckRoomX = [&](int32 x, EOverlappedPassType OverlapType, UMapRoom *CurrentRoom,
         UMapRoom *TargetRoom, UMapOutput &MOutput){
         
         bool Result;
@@ -296,7 +295,7 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
             TArray<FPass> OverlappedSteps_Passes = {{S_Up}, {S_Down}};
             
             if (Side == S_Up || Side == S_Down) { // x axis check
-                for (int x = FMath::Max(NRoom->Start.X, Current->Start.X);
+                for (int32 x = FMath::Max(NRoom->Start.X, Current->Start.X);
                      x <= FMath::Min(NRoom->Finish.X, Current->Finish.X); x++) {
 
                     // check current x
@@ -320,7 +319,7 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
                     }
 
                     // Check steps whole all their width
-                    for (int Cx = x; Cx < x + Output->Input->StepWidth; Cx++) {
+                    for (int32 Cx = x; Cx < x + Output->Input->StepWidth; Cx++) {
                         if (!CheckRoomX(Cx, OverlappingType, Current, NRoom, *Output)) {
                             Add = false;
                             break;
@@ -329,7 +328,7 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
 
                     // Add position to list ( If possible )
                     if (Add) {
-                        int RoomY;
+                        int32 RoomY;
                         if (Side == S_Up)
                         {
                             // Swap overlap room to opposite
@@ -374,7 +373,7 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
             }
 
             // Remove all not overlapped steps ( Used to move priority to long steps )
-            for (int c = 0; c < OverlappedSteps_Passes.Num(); c++)
+            for (int32 c = 0; c < OverlappedSteps_Passes.Num(); c++)
             {   
                 if (OverlappedSteps_Passes[c].Positions.Num() != 0)
                 {
@@ -415,7 +414,7 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
                 const EOverlappedPassType &OverlappingType = Tuple.Get<2>();
                 
                 if (Source.Side == S_Left || Source.Side == S_Right) {
-                    for (int y = ItemPosition.Y; y < ItemPosition.Y + Output->Input->RoomHeight; y++){ // remove walls
+                    for (int32 y = ItemPosition.Y; y < ItemPosition.Y + Output->Input->RoomHeight; y++){ // remove walls
                         FIntPoint WallPosition(ItemPosition.X, y);
                         
                         Output->Items->RemoveItemsById(WallPosition, Output->GeneratorData.WallItem->Id);
@@ -429,7 +428,7 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
                     FIntPoint ItemSize = {Output->Input->StepWidth,
                                           FMath::CeilToInt(HalfRoomHeight * 3) + 1};
                     
-                    const int WallLine = ItemPosition.Y + FMath::CeilToInt(HalfRoomHeight);
+                    const int32 WallLine = ItemPosition.Y + FMath::CeilToInt(HalfRoomHeight);
 
                     // Fix overlapping
                     if (OverlappingType != T_None)
@@ -446,7 +445,7 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
                     }
 
                     // Make hole in a wall
-                    for (int x = ItemPosition.X; x < ItemPosition.X + Output->Input->StepWidth; x++){
+                    for (int32 x = ItemPosition.X; x < ItemPosition.X + Output->Input->StepWidth; x++){
                         FIntPoint WallPosition = {x, WallLine};
 
                         Output->Items->RemoveItemsById(WallPosition, Output->GeneratorData.WallItem->Id);
@@ -471,9 +470,10 @@ void UDefaultMapGenerator::GeneratePasses(UMapOutput* Output)
         }
     }    
 }
-
 void UDefaultMapGenerator::MergeWalls(UMapOutput* Output)
 {
+    Super::MergeWalls(Output);
+    
     auto CheckItem = [](FIntPoint &Pos, UMapLayer *Layer,
                         const TMap<FIntPoint, bool> &UsedCells, UMapOutput *Output) -> bool
     {
@@ -494,9 +494,9 @@ void UDefaultMapGenerator::MergeWalls(UMapOutput* Output)
     UMapItemOutputArray *NewArray = NewObject<UMapItemOutputArray>(this);
     TMap <FIntPoint, bool> UsedCells;
 
-    for (int x = 0; x < Output->Input->Size.X; x++)
+    for (int32 x = 0; x < Output->Input->Size.X; x++)
     {
-        for (int y = 0; y < Output->Input->Size.Y; y++){
+        for (int32 y = 0; y < Output->Input->Size.Y; y++){
             FIntPoint Temp(x, y);
             
             if (!UsedCells.Contains(Temp))
@@ -529,7 +529,7 @@ void UDefaultMapGenerator::MergeWalls(UMapOutput* Output)
 
                         // Check edges of the group
                         // Extend to right
-                        for (int PosY = GroupStart.Y; PosY <= GroupFinish.Y; PosY++)
+                        for (int32 PosY = GroupStart.Y; PosY <= GroupFinish.Y; PosY++)
                         {
                             Temp = FIntPoint(GroupFinish.X + 1, PosY);
                             if (!CheckItem(Temp, Item->Layers[0],
@@ -545,7 +545,7 @@ void UDefaultMapGenerator::MergeWalls(UMapOutput* Output)
                         }
 
                         // Extend to bottom
-                        for (int PosX = GroupStart.X; PosX <= GroupFinish.X; PosX++)
+                        for (int32 PosX = GroupStart.X; PosX <= GroupFinish.X; PosX++)
                         {
                             Temp = FIntPoint(PosX, GroupFinish.Y + 1);
                             if (!CheckItem(Temp, Item->Layers[0],
@@ -565,9 +565,9 @@ void UDefaultMapGenerator::MergeWalls(UMapOutput* Output)
                     while (IsGroupExtended);
                     
                     // Mark cells in group as used
-                    for (int Px = GroupStart.X; Px <= GroupFinish.X; Px++)
+                    for (int32 Px = GroupStart.X; Px <= GroupFinish.X; Px++)
                     {
-                        for (int Py = GroupStart.Y; Py <= GroupFinish.Y; Py++)
+                        for (int32 Py = GroupStart.Y; Py <= GroupFinish.Y; Py++)
                         {
                             UsedCells.Add(FIntPoint(Px, Py), true);
                         }
@@ -595,9 +595,9 @@ void UDefaultMapGenerator::MergeWalls(UMapOutput* Output)
 
 void UDefaultMapGenerator::SetRoomFlags(UMapOutput* Output)
 {
-    
+    Super::SetRoomFlags(Output);
 }
 void UDefaultMapGenerator::PlaceStructures(UMapOutput* Output)
 {
-    
+    Super::PlaceStructures(Output);
 }

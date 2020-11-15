@@ -1,16 +1,17 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// (c) DPACK.inc
 
 
 #include "GameObject.h"
-#include "../Registry.h"
+#include "../GameInstance/Registry.h"
+
 #include "Kismet/GameplayStatics.h"
 
-UGameObject::UGameObject()
+UGameObjectComponent::UGameObjectComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
-void UGameObject::BeginPlay()
+void UGameObjectComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -18,10 +19,10 @@ void UGameObject::BeginPlay()
 	URegistry *Registry = dynamic_cast<URegistry *> (UGameplayStatics::GetGameInstance(this));
 	if (Registry)
 	{
-		Registry->GameObjectsList.Add(this); // Register
+		Registry->GameObjects.Add(this); // Register
 	}
 }
-void UGameObject::BeginDestroy()
+void UGameObjectComponent::BeginDestroy()
 {
 	Super::BeginDestroy();
 
@@ -29,12 +30,11 @@ void UGameObject::BeginDestroy()
 	URegistry *Registry = dynamic_cast<URegistry *> (UGameplayStatics::GetGameInstance(this));
 	if (Registry)
 	{
-		Registry->GameObjectsList.Remove(this); // Unregister
+		Registry->GameObjects.Remove(this); // Unregister
 	} 
 }
 
-void UGameObject::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UGameObjectComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
-

@@ -1,9 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// (c) DPACK.inc
 
 
 #include "ColdWeapon.h"
 
 void AColdWeapon::Fire()
 {
-    
+    Super::Fire();
 }
